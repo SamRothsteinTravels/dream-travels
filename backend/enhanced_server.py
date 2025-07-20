@@ -197,9 +197,10 @@ def create_enhanced_itinerary(
     num_days: int, 
     travel_dates: Optional[List[str]] = None,
     solo_female_traveler: bool = False,
-    budget_range: Optional[str] = None
+    budget_range: Optional[str] = None,
+    custom_activities: Optional[List[CustomActivity]] = None
 ) -> Itinerary:
-    """Create enhanced itinerary with safety considerations"""
+    """Create enhanced itinerary with safety considerations and custom activities"""
     
     dest_key = normalize_destination_key(destination)
     
