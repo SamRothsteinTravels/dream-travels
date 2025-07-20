@@ -799,6 +799,11 @@ function EnhancedApp() {
                   </h3>
                   <p className="text-blue-100 text-lg mt-2">
                     Estimated Time: {day.total_estimated_time} • {day.activities.length} Activities
+                    {itinerary.custom_activities_included > 0 && (
+                      <span className="ml-2 px-2 py-1 bg-yellow-400 bg-opacity-30 rounded text-sm">
+                        ✨ {itinerary.custom_activities_included} Custom
+                      </span>
+                    )}
                   </p>
                   {day.safety_notes && soloFemaleTraveler && (
                     <div className="mt-3 p-3 bg-blue-400 bg-opacity-30 rounded-lg">
