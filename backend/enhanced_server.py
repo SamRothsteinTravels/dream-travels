@@ -150,7 +150,9 @@ def normalize_destination_key(destination: str) -> str:
         "mexico_city_mexico": "mexico_city",
         "buenos_aires_argentina": "buenos_aires",
         "toronto_ontario": "toronto",
-        "toronto_canada": "toronto"
+        "toronto_canada": "toronto",
+        "london_uk": "london",
+        "london_england": "london"
     }
     
     return mappings.get(dest_key, dest_key)
