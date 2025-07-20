@@ -145,8 +145,20 @@ def cluster_activities_by_location(activities: List[Activity], max_distance: flo
 
 def create_itinerary(destination: str, interests: List[str], num_days: int, travel_dates: Optional[List[str]] = None) -> Itinerary:
     """Create a smart itinerary based on interests and geographic clustering"""
-    # Get destination key
-    dest_key = destination.lower().replace(" ", "").replace(",", "")
+    # Get destination key - handle various formats
+    dest_key = destination.lower().replace(" ", "").replace(",", "").replace("fl", "").replace("ca", "").replace("ny", "")
+    
+    # Map common destination variations
+    destination_map = {
+        "orlando": "orlando",
+        "orlandofl": "orlando", 
+        "sanfrancisco": "san francisco",
+        "sanfranciscoca": "san francisco",
+        "newyork": "new york",
+        "newyorkny": "new york"
+    }
+    
+    dest_key = destination_map.get(dest_key, dest_key)
     
     # Find matching destination in mock data
     if dest_key not in MOCK_ACTIVITIES:
