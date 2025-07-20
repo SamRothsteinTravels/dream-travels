@@ -331,20 +331,32 @@ async def generate_enhanced_itinerary(request: ItineraryRequest):
 @api_router.get("/destinations", response_model=Dict[str, Any])
 async def get_all_destinations(
     region: Optional[str] = Query(None, description="Filter by region"),
+    city: Optional[str] = Query(None, description="Filter by specific city or area"),
     solo_female_safe: Optional[bool] = Query(False, description="Show only solo female safe destinations"),
-    hidden_gems: Optional[bool] = Query(False, description="Show only hidden gems"),
-    min_safety_rating: Optional[int] = Query(None, description="Minimum solo female safety rating")
+    hidden_gems: Optional[bool] = Query(False, description="Show only hidden gems")
 ):
-    """Get destinations with optional filtering"""
+    """Get destinations with optional filtering - only shows destinations with safety rating 3+"""
     
-    destinations = DESTINATIONS_DATABASE.copy()
+    # Start with only safe destinations (safety rating >= 3)
+    safe_destinations = {
+        k: v for k, v in DESTINATIONS_DATABASE.items() 
+        if v["solo_female_safety"] >= 3
+    }
+    
+    destinations = safe_destinations.copy()
     
     if region:
-        destinations = get_destinations_by_region(region)
+        destinations = {k: v for k, v in destinations.items() if v["region"].lower() == region.lower()}
     
-    if solo_female_safe or min_safety_rating:
-        rating = min_safety_rating or 4
-        destinations = {k: v for k, v in destinations.items() if v["solo_female_safety"] >= rating}
+    if city:
+        city_lower = city.lower()
+        destinations = {
+            k: v for k, v in destinations.items() 
+            if city_lower in v["name"].lower() or city_lower in v["country"].lower()
+        }
+    
+    if solo_female_safe:
+        destinations = {k: v for k, v in destinations.items() if v["solo_female_safety"] >= 4}
     
     if hidden_gems:
         destinations = {k: v for k, v in destinations.items() if v.get("hidden_gem", False)}
@@ -366,7 +378,8 @@ async def get_all_destinations(
     return {
         "destinations": formatted_destinations,
         "total": len(formatted_destinations),
-        "regions": list(set([d["region"] for d in formatted_destinations]))
+        "regions": list(set([d["region"] for d in formatted_destinations])),
+        "cities": list(set([d["name"].split(",")[0] for d in formatted_destinations]))
     }
 
 @api_router.get("/interests", response_model=Dict[str, Any])
