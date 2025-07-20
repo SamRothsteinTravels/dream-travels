@@ -166,9 +166,9 @@ function EnhancedApp() {
       const params = new URLSearchParams();
       
       if (filters.region) params.append('region', filters.region);
+      if (filters.city) params.append('city', filters.city);
       if (filters.solo_female_safe) params.append('solo_female_safe', 'true');
       if (filters.hidden_gems) params.append('hidden_gems', 'true');
-      if (filters.min_safety_rating) params.append('min_safety_rating', filters.min_safety_rating);
 
       const response = await axios.get(`${API}/destinations?${params.toString()}`);
       setDestinations(response.data.destinations);
@@ -179,6 +179,16 @@ function EnhancedApp() {
       setLoading(false);
     }
   }, [filters]);
+
+  // Fetch cities and regions data
+  const fetchCitiesAndRegions = async () => {
+    try {
+      const response = await axios.get(`${API}/cities-and-regions`);
+      setCitiesAndRegions(response.data);
+    } catch (error) {
+      console.error("Error fetching cities and regions:", error);
+    }
+  };
 
   // Fetch available interests
   const fetchInterests = async () => {
