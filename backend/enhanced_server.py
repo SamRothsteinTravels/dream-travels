@@ -319,7 +319,8 @@ async def generate_enhanced_itinerary(request: ItineraryRequest):
             num_days=num_days,
             travel_dates=request.travel_dates,
             solo_female_traveler=request.solo_female_traveler,
-            budget_range=request.budget_range
+            budget_range=request.budget_range,
+            custom_activities=request.custom_activities
         )
         
         return itinerary
