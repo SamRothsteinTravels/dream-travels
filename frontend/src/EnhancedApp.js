@@ -147,6 +147,17 @@ function EnhancedApp() {
   const [filters, setFilters] = useState({});
   const [soloFemaleTraveler, setSoloFemaleTraveler] = useState(false);
   const [budgetRange, setBudgetRange] = useState("");
+  const [citiesAndRegions, setCitiesAndRegions] = useState({ popular_cities: [] });
+  
+  // New state for custom activities
+  const [customActivities, setCustomActivities] = useState([]);
+  const [newCustomActivity, setNewCustomActivity] = useState({
+    name: "",
+    location: "",
+    description: "",
+    category: "custom",
+    priority: 3
+  });
 
   // Fetch destinations with filters
   const fetchDestinations = useCallback(async () => {
