@@ -313,6 +313,14 @@ function EnhancedApp() {
     setSoloFemaleTraveler(false);
     setBudgetRange("");
     setFilters({});
+    setCustomActivities([]);
+    setNewCustomActivity({
+      name: "",
+      location: "",
+      description: "",
+      category: "custom",
+      priority: 3
+    });
   };
 
   const nextStep = () => {
