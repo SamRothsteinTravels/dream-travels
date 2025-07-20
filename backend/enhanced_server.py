@@ -445,18 +445,28 @@ async def get_cities_and_regions():
 @api_router.get("/destinations/search")
 async def search_destinations(
     interest: Optional[str] = Query(None, description="Search by interest"),
-    safety_rating: Optional[int] = Query(None, description="Minimum safety rating"),
+    city_name: Optional[str] = Query(None, description="Search by city name"),
     region: Optional[str] = Query(None, description="Filter by region")
 ):
-    """Search destinations by various criteria"""
+    """Search destinations by various criteria - only safe destinations (3+ rating)"""
     
-    results = DESTINATIONS_DATABASE.copy()
+    # Start with safe destinations only
+    results = {
+        k: v for k, v in DESTINATIONS_DATABASE.items() 
+        if v["solo_female_safety"] >= 3
+    }
     
     if interest:
         results = search_destinations_by_interest(interest)
+        # Re-filter for safety
+        results = {k: v for k, v in results.items() if v["solo_female_safety"] >= 3}
     
-    if safety_rating:
-        results = {k: v for k, v in results.items() if v["solo_female_safety"] >= safety_rating}
+    if city_name:
+        city_lower = city_name.lower()
+        results = {
+            k: v for k, v in results.items() 
+            if city_lower in v["name"].lower()
+        }
     
     if region:
         results = {k: v for k, v in results.items() if v["region"].lower() == region.lower()}
