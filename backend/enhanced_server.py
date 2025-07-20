@@ -299,7 +299,8 @@ def create_enhanced_itinerary(
         interests=interests,
         days=days,
         solo_female_safety_rating=dest_data.get('solo_female_safety'),
-        safety_notes=dest_data.get('safety_notes') if solo_female_traveler else None
+        safety_notes=dest_data.get('safety_notes') if solo_female_traveler else None,
+        custom_activities_included=custom_count
     )
 
 # Enhanced API Endpoints
