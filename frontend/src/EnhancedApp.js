@@ -203,6 +203,7 @@ function EnhancedApp() {
   useEffect(() => {
     fetchDestinations();
     fetchInterests();
+    fetchCitiesAndRegions();
   }, [fetchDestinations]);
 
   const handleDestinationSelect = (destination) => {
