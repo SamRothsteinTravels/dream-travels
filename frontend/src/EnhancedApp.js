@@ -420,7 +420,7 @@ function EnhancedApp() {
               🌍 Choose Your Destination
             </h2>
 
-            <FilterSection filters={filters} onFiltersChange={setFilters} />
+            <FilterSection filters={filters} onFiltersChange={setFilters} citiesAndRegions={citiesAndRegions} />
 
             {loading ? (
               <div className="text-center py-12">
