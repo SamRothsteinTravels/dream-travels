@@ -62,6 +62,7 @@ class Activity(BaseModel):
     image_url: Optional[str] = None
     solo_female_notes: Optional[str] = None
     safety_rating: Optional[int] = None
+    is_custom: bool = False  # New field to identify custom activities
 
 class DayItinerary(BaseModel):
     day: int
