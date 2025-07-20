@@ -828,6 +828,11 @@ function EnhancedApp() {
                             <div>
                               <h4 className="text-xl font-bold text-gray-900 mb-2">
                                 {activity.name}
+                                {activity.is_custom && (
+                                  <span className="ml-2 px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-medium">
+                                    ✨ Custom Activity
+                                  </span>
+                                )}
                               </h4>
                               <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-3 ${
                                 activity.category === 'solo female' ? 'bg-pink-100 text-pink-800' : 'bg-purple-100 text-purple-800'
