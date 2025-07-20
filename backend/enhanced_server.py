@@ -406,6 +406,42 @@ async def get_available_interests():
         "solo_female_guidelines": SOLO_FEMALE_SAFETY_GUIDELINES
     }
 
+@api_router.get("/cities-and-regions")
+async def get_cities_and_regions():
+    """Get organized list of cities and regions for filtering"""
+    safe_destinations = {
+        k: v for k, v in DESTINATIONS_DATABASE.items() 
+        if v["solo_female_safety"] >= 3
+    }
+    
+    regions = {}
+    cities = []
+    
+    for key, data in safe_destinations.items():
+        region = data["region"]
+        if region not in regions:
+            regions[region] = []
+        
+        city_info = {
+            "key": key,
+            "name": data["name"],
+            "country": data["country"],
+            "safety_rating": data["solo_female_safety"],
+            "hidden_gem": data.get("hidden_gem", False)
+        }
+        
+        regions[region].append(city_info)
+        cities.append(city_info)
+    
+    return {
+        "regions": regions,
+        "all_cities": sorted(cities, key=lambda x: x["name"]),
+        "popular_cities": [
+            city for city in cities 
+            if city["safety_rating"] >= 4 and not city["hidden_gem"]
+        ][:10]
+    }
+
 @api_router.get("/destinations/search")
 async def search_destinations(
     interest: Optional[str] = Query(None, description="Search by interest"),
