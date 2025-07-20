@@ -32,7 +32,14 @@ app = FastAPI(title="TravelMate Pro", description="Advanced Travel Itinerary Bui
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-# Enhanced Models
+# Enhanced Models with Custom Activities
+class CustomActivity(BaseModel):
+    name: str
+    location: str
+    description: Optional[str] = None
+    category: str = "custom"
+    priority: int = Field(ge=1, le=5, default=3, description="Priority level 1-5")
+
 class ItineraryRequest(BaseModel):
     destination: str
     interests: List[str]
@@ -41,6 +48,7 @@ class ItineraryRequest(BaseModel):
     budget_range: Optional[str] = None  # "budget", "mid-range", "luxury"
     solo_female_traveler: Optional[bool] = False
     max_distance_km: Optional[int] = None
+    custom_activities: Optional[List[CustomActivity]] = []  # New field for custom activities
     
 class Activity(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
