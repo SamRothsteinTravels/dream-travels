@@ -157,6 +157,40 @@ def normalize_destination_key(destination: str) -> str:
     
     return mappings.get(dest_key, dest_key)
 
+def create_custom_activity_from_input(custom_activity: CustomActivity, destination_center: Dict[str, float]) -> Activity:
+    """Convert custom activity input to Activity object"""
+    # For custom activities, we'll place them near the destination center with some offset
+    import random
+    lat_offset = random.uniform(-0.01, 0.01)
+    lng_offset = random.uniform(-0.01, 0.01)
+    
+    return Activity(
+        name=custom_activity.name,
+        category=custom_activity.category,
+        description=custom_activity.description or f"Custom activity: {custom_activity.name}",
+        location={
+            "lat": destination_center["lat"] + lat_offset,
+            "lng": destination_center["lng"] + lng_offset
+        },
+        address=custom_activity.location,
+        estimated_duration="2-3 hours",
+        best_time="Flexible",
+        is_custom=True,
+        solo_female_notes="Custom activity - please research safety independently"
+    )
+
+def get_destination_center(dest_key: str) -> Dict[str, float]:
+    """Get approximate center coordinates for a destination"""
+    centers = {
+        "london": {"lat": 51.5074, "lng": -0.1278},
+        "paris": {"lat": 48.8566, "lng": 2.3522},
+        "new_york": {"lat": 40.7128, "lng": -74.0060},
+        "tokyo": {"lat": 35.6762, "lng": 139.6503},
+        "toronto": {"lat": 43.6532, "lng": -79.3832},
+        "melbourne": {"lat": -37.8136, "lng": 144.9631}
+    }
+    return centers.get(dest_key, {"lat": 0.0, "lng": 0.0})
+
 def create_enhanced_itinerary(
     destination: str, 
     interests: List[str], 
