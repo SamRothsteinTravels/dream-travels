@@ -232,6 +232,31 @@ function EnhancedApp() {
     setTravelDates(travelDates.filter((_, i) => i !== index));
   };
 
+  // Custom activity management functions
+  const addCustomActivity = () => {
+    if (!newCustomActivity.name.trim() || !newCustomActivity.location.trim()) {
+      alert('Please provide both name and location for the custom activity!');
+      return;
+    }
+    
+    setCustomActivities(prev => [...prev, { ...newCustomActivity, id: Date.now().toString() }]);
+    setNewCustomActivity({
+      name: "",
+      location: "",
+      description: "",
+      category: "custom",
+      priority: 3
+    });
+  };
+
+  const removeCustomActivity = (id) => {
+    setCustomActivities(prev => prev.filter(activity => activity.id !== id));
+  };
+
+  const updateCustomActivity = (field, value) => {
+    setNewCustomActivity(prev => ({ ...prev, [field]: value }));
+  };
+
   const generateItinerary = async () => {
     if (!selectedDestination || selectedInterests.length === 0) {
       alert("Please select a destination and at least one interest!");
