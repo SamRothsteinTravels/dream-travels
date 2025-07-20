@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Backend API Testing Script for Travel Itinerary App
-Tests the available destinations and itinerary generation endpoints
+Enhanced Backend API Testing Script for TravelMate Pro
+Tests the enhanced destinations, interests, itinerary generation, and export endpoints
 """
 
 import requests
