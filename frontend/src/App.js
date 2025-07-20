@@ -1,15 +1,10 @@
-import React from "react";
-import "./App.css";
-import EnhancedApp from "./EnhancedApp";
-
-function App() {
 import React, { useState } from "react";
 import "./App.css";
 import EnhancedApp from "./EnhancedApp";
 import ThemeParkPlanner from "./components/ThemeParkPlanner";
 
 function App() {
-  const [currentApp, setCurrentApp] = useState('travel'); // 'travel' or 'themepark'
+  const [currentApp, setCurrentApp] = useState(null); // null, 'travel', or 'themepark'
 
   const AppSelector = () => (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
