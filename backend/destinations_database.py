@@ -218,6 +218,74 @@ DESTINATIONS_DATABASE = {
     },
 
     # EUROPE - MAJOR CITIES
+    "london": {
+        "name": "London, UK",
+        "country": "United Kingdom",
+        "region": "Europe",
+        "solo_female_safety": 4,
+        "safety_notes": "Generally very safe. Be aware of pickpockets in tourist areas. Public transport excellent.",
+        "description": "Historic capital with world-class museums, royal palaces, and diverse culture",
+        "hidden_gem": False,
+        "activities": {
+            "museums": [
+                {
+                    "name": "British Museum",
+                    "category": "museums",
+                    "description": "World's largest collection of historical artifacts and art",
+                    "location": {"lat": 51.5194, "lng": -0.1270},
+                    "address": "Great Russell St, London WC1B 3DG, UK",
+                    "estimated_duration": "4-6 hours",
+                    "best_time": "Early morning to avoid crowds",
+                    "solo_female_notes": "Very safe, excellent for solo exploration"
+                },
+                {
+                    "name": "Tate Modern",
+                    "category": "museums",
+                    "description": "Premier modern and contemporary art gallery",
+                    "location": {"lat": 51.5076, "lng": -0.0994},
+                    "address": "Bankside, London SE1 9TG, UK",
+                    "estimated_duration": "3-4 hours",
+                    "best_time": "Afternoon",
+                    "solo_female_notes": "Safe, well-staffed, great for solo art lovers"
+                }
+            ],
+            "historic landmarks": [
+                {
+                    "name": "Tower of London",
+                    "category": "historic landmarks",
+                    "description": "Historic castle and home to the Crown Jewels",
+                    "location": {"lat": 51.5081, "lng": -0.0759},
+                    "address": "St Katharine's & Wapping, London EC3N 4AB, UK",
+                    "estimated_duration": "3-4 hours",
+                    "best_time": "Early morning",
+                    "solo_female_notes": "Very safe, guided tours available"
+                },
+                {
+                    "name": "Westminster Abbey",
+                    "category": "historic landmarks",
+                    "description": "Gothic abbey church where monarchs are crowned",
+                    "location": {"lat": 51.4994, "lng": -0.1273},
+                    "address": "20 Deans Yd, Westminster, London SW1P 3PA, UK",
+                    "estimated_duration": "2-3 hours",
+                    "best_time": "Morning",
+                    "solo_female_notes": "Safe, audio guides available for solo visitors"
+                }
+            ],
+            "solo female": [
+                {
+                    "name": "Covent Garden",
+                    "category": "solo female",
+                    "description": "Vibrant market area perfect for solo exploration",
+                    "location": {"lat": 51.5118, "lng": -0.1226},
+                    "address": "Covent Garden, London WC2E, UK",
+                    "estimated_duration": "2-3 hours",
+                    "best_time": "Afternoon",
+                    "solo_female_notes": "Excellent for solo female travelers - safe, lively, great shopping and cafes"
+                }
+            ]
+        }
+    },
+
     "paris": {
         "name": "Paris, France",
         "country": "France",
