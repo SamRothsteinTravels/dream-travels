@@ -1,26 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const INTEREST_OPTIONS = [
-  "scenic drives",
-  "hikes", 
-  "beaches",
-  "theme parks",
-  "museums",
-  "historic landmarks",
-  "family friendly",
-  "dining hot spots",
-  "outdoor activities",
-  "cultural experiences",
-  "nightlife",
-  "shopping"
-];
-
-const HERO_IMAGE = "https://images.unsplash.com/photo-1615826932727-ed9f182ac67e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBwbGFubmluZ3xlbnwwfHx8fDE3NTMwMzU0NTd8MA&ixlib=rb-4.1.0&q=85";
+import EnhancedApp from "./EnhancedApp";
 
 function App() {
   const [destination, setDestination] = useState("");
