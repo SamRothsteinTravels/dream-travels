@@ -281,7 +281,14 @@ function EnhancedApp() {
         travel_dates: useDates ? travelDates.filter(date => date) : null,
         number_of_days: useDates ? null : parseInt(numberOfDays),
         solo_female_traveler: soloFemaleTraveler,
-        budget_range: budgetRange || null
+        budget_range: budgetRange || null,
+        custom_activities: customActivities.map(activity => ({
+          name: activity.name,
+          location: activity.location,
+          description: activity.description,
+          category: activity.category,
+          priority: activity.priority
+        }))
       };
 
       const response = await axios.post(`${API}/generate-itinerary`, requestData);
