@@ -526,6 +526,106 @@ function EnhancedApp() {
               ))}
             </div>
 
+            {/* Custom Activities Section */}
+            <div className="mb-8 p-6 bg-yellow-50 rounded-xl border border-yellow-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                ✨ Add Custom Activities
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Want to visit a specific place not covered by our standard interests? Add your own activities!
+                <br />
+                <em>Example: "Silverstone Circuit" in London, or "Local cooking class" in Tokyo</em>
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Activity Name *</label>
+                  <input
+                    type="text"
+                    value={newCustomActivity.name}
+                    onChange={(e) => updateCustomActivity('name', e.target.value)}
+                    placeholder="e.g., Silverstone Circuit, Local market tour"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Location/Address *</label>
+                  <input
+                    type="text"
+                    value={newCustomActivity.location}
+                    onChange={(e) => updateCustomActivity('location', e.target.value)}
+                    placeholder="e.g., Silverstone, Northamptonshire, UK"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500"
+                  />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Description (Optional)</label>
+                  <input
+                    type="text"
+                    value={newCustomActivity.description}
+                    onChange={(e) => updateCustomActivity('description', e.target.value)}
+                    placeholder="Brief description of the activity"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Priority (1-5)</label>
+                  <select
+                    value={newCustomActivity.priority}
+                    onChange={(e) => updateCustomActivity('priority', parseInt(e.target.value))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500"
+                  >
+                    <option value={5}>5 - Must See!</option>
+                    <option value={4}>4 - Very Important</option>
+                    <option value={3}>3 - Moderate (default)</option>
+                    <option value={2}>2 - If Time Permits</option>
+                    <option value={1}>1 - Optional</option>
+                  </select>
+                </div>
+              </div>
+              
+              <button
+                onClick={addCustomActivity}
+                className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors font-semibold"
+              >
+                + Add Custom Activity
+              </button>
+              
+              {/* Display added custom activities */}
+              {customActivities.length > 0 && (
+                <div className="mt-4">
+                  <h4 className="font-medium text-gray-700 mb-2">Your Custom Activities:</h4>
+                  <div className="space-y-2">
+                    {customActivities.map((activity) => (
+                      <div key={activity.id} className="flex items-center justify-between p-3 bg-white rounded-lg border border-yellow-300">
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">{activity.name}</div>
+                          <div className="text-sm text-gray-600">{activity.location}</div>
+                          {activity.description && (
+                            <div className="text-xs text-gray-500 mt-1">{activity.description}</div>
+                          )}
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-medium">
+                            Priority: {activity.priority}
+                          </span>
+                          <button
+                            onClick={() => removeCustomActivity(activity.id)}
+                            className="text-red-600 hover:text-red-800 font-medium text-sm"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             {selectedInterests.length > 0 && (
               <div className="text-center">
                 <button
