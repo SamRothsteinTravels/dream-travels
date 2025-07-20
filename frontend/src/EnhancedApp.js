@@ -66,11 +66,11 @@ const DestinationCard = ({ destination, onSelect, selected }) => (
   </div>
 );
 
-const FilterSection = ({ filters, onFiltersChange }) => (
+const FilterSection = ({ filters, onFiltersChange, citiesAndRegions }) => (
   <div className="bg-gray-50 p-6 rounded-xl mb-6">
     <h3 className="text-lg font-semibold mb-4">🔍 Filters</h3>
     
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Region Filter */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">Region</label>
@@ -88,44 +88,45 @@ const FilterSection = ({ filters, onFiltersChange }) => (
         </select>
       </div>
 
-      {/* Safety Rating Filter */}
+      {/* City/Area Filter */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Min Safety Rating</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">City or Area</label>
         <select 
-          value={filters.min_safety_rating || ""} 
-          onChange={(e) => onFiltersChange({...filters, min_safety_rating: e.target.value ? parseInt(e.target.value) : null})}
+          value={filters.city || ""} 
+          onChange={(e) => onFiltersChange({...filters, city: e.target.value || null})}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">Any Rating</option>
-          <option value="5">Extremely Safe (5/5)</option>
-          <option value="4">Very Safe (4/5+)</option>
-          <option value="3">Moderately Safe (3/5+)</option>
+          <option value="">All Cities</option>
+          {citiesAndRegions.popular_cities?.map(city => (
+            <option key={city.key} value={city.name.split(",")[0]}>
+              {city.name} ({city.safety_rating}/5 ⭐)
+            </option>
+          ))}
         </select>
       </div>
+    </div>
 
-      {/* Special Options */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Special</label>
-        <div className="space-y-2">
-          <label className="flex items-center">
-            <input 
-              type="checkbox" 
-              checked={filters.hidden_gems || false}
-              onChange={(e) => onFiltersChange({...filters, hidden_gems: e.target.checked})}
-              className="mr-2"
-            />
-            <span className="text-sm">Hidden Gems Only</span>
-          </label>
-          <label className="flex items-center">
-            <input 
-              type="checkbox" 
-              checked={filters.solo_female_safe || false}
-              onChange={(e) => onFiltersChange({...filters, solo_female_safe: e.target.checked})}
-              className="mr-2"
-            />
-            <span className="text-sm">Solo Female Safe (4+)</span>
-          </label>
-        </div>
+    {/* Special Options */}
+    <div className="mt-4">
+      <div className="space-y-2">
+        <label className="flex items-center">
+          <input 
+            type="checkbox" 
+            checked={filters.hidden_gems || false}
+            onChange={(e) => onFiltersChange({...filters, hidden_gems: e.target.checked})}
+            className="mr-2"
+          />
+          <span className="text-sm">💎 Hidden Gems Only</span>
+        </label>
+        <label className="flex items-center">
+          <input 
+            type="checkbox" 
+            checked={filters.solo_female_safe || false}
+            onChange={(e) => onFiltersChange({...filters, solo_female_safe: e.target.checked})}
+            className="mr-2"
+          />
+          <span className="text-sm">👩 Solo Female Safe (4+ Rating)</span>
+        </label>
       </div>
     </div>
   </div>
