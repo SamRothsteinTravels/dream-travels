@@ -232,6 +232,15 @@ def create_enhanced_itinerary(
                 activity = Activity(**activity_data)
                 selected_activities.append(activity)
     
+    # Add custom activities
+    custom_count = 0
+    if custom_activities:
+        destination_center = get_destination_center(dest_key)
+        for custom_activity in custom_activities:
+            custom_activity_obj = create_custom_activity_from_input(custom_activity, destination_center)
+            selected_activities.append(custom_activity_obj)
+            custom_count += 1
+    
     if not selected_activities:
         raise HTTPException(
             status_code=400, 
