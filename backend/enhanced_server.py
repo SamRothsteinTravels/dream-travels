@@ -78,6 +78,7 @@ class Itinerary(BaseModel):
     days: List[DayItinerary]
     solo_female_safety_rating: Optional[int] = None
     safety_notes: Optional[str] = None
+    custom_activities_included: int = 0  # Count of custom activities
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class UserProfile(BaseModel):
