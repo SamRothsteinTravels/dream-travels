@@ -17,6 +17,10 @@ from destinations_database import (
     get_hidden_gems,
     search_destinations_by_interest
 )
+from theme_park_service import ThemeParkService
+from travel_blog_service import TravelBlogService
+from queue_times_service import QueueTimesService
+from waittimes_app_service import WaitTimesAppService
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
