@@ -30,6 +30,12 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
+# Initialize services
+theme_park_service = ThemeParkService(client)
+travel_blog_service = TravelBlogService(client) 
+queue_times_service = QueueTimesService(client)
+waittimes_app_service = WaitTimesAppService(client)
+
 # Create the main app without a prefix
 app = FastAPI(title="TravelMate Pro", description="Advanced Travel Itinerary Builder")
 
