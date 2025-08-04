@@ -10,7 +10,7 @@ import sys
 from typing import Dict, Any
 
 # Get backend URL from environment
-BACKEND_URL = "https://f65693a0-1b97-4e30-b245-f7ec80833314.preview.emergentagent.com"
+BACKEND_URL = "https://0ab3f2ef-9dd3-4f76-8714-d6d5aee30e46.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 def test_enhanced_destinations_endpoint():
