@@ -549,13 +549,18 @@ async def generate_destination_data(
         
         # Process scraped activities
         for activity_data in destination_data.get("activities", []):
+            # Ensure we have valid duration
+            duration = activity_data.get("duration")
+            if not duration or duration is None:
+                duration = "2-3 hours"
+            
             activity = Activity(
                 name=activity_data.get("name", "Unknown Activity"),
                 category=activity_data.get("category", "general"),
-                description=activity_data.get("description", "")[:200],  # Limit description
+                description=activity_data.get("description", "")[:200] if activity_data.get("description") else "",
                 location={"lat": 0.0, "lng": 0.0},  # Would need geocoding for exact coordinates
                 address=f"{destination}",  # Generic address
-                estimated_duration=activity_data.get("duration", "2-3 hours"),
+                estimated_duration=duration,
                 best_time="Morning or afternoon",
                 is_custom=False
             )
