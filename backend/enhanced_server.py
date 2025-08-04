@@ -37,7 +37,7 @@ queue_times_service = QueueTimesService(client)
 waittimes_app_service = WaitTimesAppService(client)
 
 # Create the main app without a prefix
-app = FastAPI(title="TravelMate Pro", description="Advanced Travel Itinerary Builder")
+app = FastAPI(title="Dream Travels", description="Advanced Travel Itinerary Builder")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
