@@ -525,6 +525,197 @@ async def export_itinerary(request: ExportRequest):
         "export_id": str(uuid.uuid4())
     }
 
+@api_router.post("/generate-destination-data")
+async def generate_destination_data(
+    destination: str = Query(..., description="Destination name"),
+    interests: List[str] = Query(..., description="List of interests")
+):
+    """Generate destination data using travel blog scraping (replaces Google Places API)"""
+    try:
+        logger.info(f"Generating destination data for {destination} with interests: {interests}")
+        
+        # Use travel blog service to scrape destination information
+        destination_data = await travel_blog_service.scrape_destination_data(destination, interests)
+        
+        if not destination_data:
+            return {
+                "error": "No data found for this destination",
+                "destination": destination,
+                "suggestions": "Try a more specific location name or check spelling"
+            }
+        
+        # Transform the scraped data into activities compatible with our itinerary system
+        activities = []
+        
+        # Process scraped activities
+        for activity_data in destination_data.get("activities", []):
+            activity = Activity(
+                name=activity_data.get("name", "Unknown Activity"),
+                category=activity_data.get("category", "general"),
+                description=activity_data.get("description", "")[:200],  # Limit description
+                location={"lat": 0.0, "lng": 0.0},  # Would need geocoding for exact coordinates
+                address=f"{destination}",  # Generic address
+                estimated_duration=activity_data.get("duration", "2-3 hours"),
+                best_time="Morning or afternoon",
+                is_custom=False
+            )
+            activities.append(activity)
+        
+        # Process restaurants as dining activities
+        for restaurant_data in destination_data.get("restaurants", []):
+            activity = Activity(
+                name=restaurant_data.get("name", "Local Restaurant"),
+                category="dining hot spots",
+                description=restaurant_data.get("description", ""),
+                location={"lat": 0.0, "lng": 0.0},
+                address=f"{destination}",
+                estimated_duration="1-2 hours",
+                best_time="Lunch or dinner time",
+                is_custom=False
+            )
+            activities.append(activity)
+        
+        return {
+            "destination": destination,
+            "interests": interests,
+            "total_activities": len(activities),
+            "activities": [activity.dict() for activity in activities[:20]],  # Limit to 20
+            "restaurants": destination_data.get("restaurants", [])[:10],  # Limit to 10
+            "accommodations": destination_data.get("accommodations", [])[:5],  # Limit to 5
+            "local_tips": destination_data.get("local_tips", [])[:8],  # Limit to 8
+            "budget_info": destination_data.get("budget_info", {}),
+            "safety_info": destination_data.get("safety_info", {}),
+            "sources": destination_data.get("sources", []),
+            "data_freshness": destination_data.get("last_updated"),
+            "powered_by": "Travel Blog Scraping Service"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error generating destination data: {e}")
+        return {
+            "error": f"Failed to generate destination data: {str(e)}",
+            "destination": destination
+        }
+
+@api_router.get("/theme-parks/queue-times")
+async def get_theme_parks_queue_times():
+    """Get available theme parks from Queue Times API"""
+    try:
+        parks = await queue_times_service.get_available_parks()
+        return {
+            "parks": parks,
+            "total_parks": len(parks),
+            "source": "queue-times.com",
+            "note": "Free API with 80+ theme parks worldwide"
+        }
+    except Exception as e:
+        logger.error(f"Error fetching Queue Times parks: {e}")
+        return {"error": f"Failed to fetch parks: {str(e)}"}
+
+@api_router.get("/theme-parks/waittimes-app")
+async def get_theme_parks_waittimes_app():
+    """Get available theme parks from WaitTimesApp API"""
+    try:
+        parks = await waittimes_app_service.get_available_parks()
+        return {
+            "parks": parks,
+            "total_parks": len(parks),
+            "source": "waittimes-app",
+            "note": "International theme park coverage"
+        }
+    except Exception as e:
+        logger.error(f"Error fetching WaitTimesApp parks: {e}")
+        return {"error": f"Failed to fetch parks: {str(e)}"}
+
+@api_router.get("/theme-parks/{park_id}/wait-times")
+async def get_park_wait_times(
+    park_id: str,
+    source: str = Query("queue-times", description="Data source: queue-times or waittimes-app")
+):
+    """Get real-time wait times for a specific theme park"""
+    try:
+        if source == "queue-times":
+            wait_data = await queue_times_service.get_live_wait_times(park_id)
+        elif source == "waittimes-app":
+            wait_data = await waittimes_app_service.get_live_wait_times(park_id)
+        else:
+            return {"error": "Invalid source. Use 'queue-times' or 'waittimes-app'"}
+        
+        if not wait_data:
+            return {"error": f"No wait time data found for park {park_id}"}
+        
+        return wait_data
+        
+    except Exception as e:
+        logger.error(f"Error fetching wait times for {park_id}: {e}")
+        return {"error": f"Failed to fetch wait times: {str(e)}"}
+
+@api_router.get("/theme-parks/{park_id}/crowd-predictions")
+async def get_park_crowd_predictions(
+    park_id: str,
+    date: str = Query(None, description="Target date (YYYY-MM-DD), defaults to today"),
+    source: str = Query("queue-times", description="Data source: queue-times or waittimes-app")
+):
+    """Get crowd level predictions for a theme park"""
+    try:
+        from datetime import date as date_obj
+        target_date = date_obj.today() if not date else date_obj.fromisoformat(date)
+        
+        if source == "queue-times":
+            crowd_data = await queue_times_service.get_crowd_predictions(park_id, target_date)
+        elif source == "waittimes-app":
+            crowd_data = await waittimes_app_service.get_crowd_predictions(park_id, target_date)
+        else:
+            return {"error": "Invalid source. Use 'queue-times' or 'waittimes-app'"}
+        
+        if not crowd_data:
+            return {"error": f"No crowd prediction data found for park {park_id}"}
+        
+        return crowd_data
+        
+    except Exception as e:
+        logger.error(f"Error fetching crowd predictions for {park_id}: {e}")
+        return {"error": f"Failed to fetch crowd predictions: {str(e)}"}
+
+@api_router.post("/theme-parks/{park_id}/optimize-plan")
+async def optimize_theme_park_plan(
+    park_id: str,
+    request: Dict[str, Any],
+    source: str = Query("queue-times", description="Data source: queue-times or waittimes-app")
+):
+    """Generate optimized theme park touring plan"""
+    try:
+        selected_attractions = request.get("selected_attractions", [])
+        visit_date_str = request.get("visit_date")
+        arrival_time = request.get("arrival_time", "09:00")
+        
+        if not selected_attractions:
+            return {"error": "No attractions selected"}
+        
+        from datetime import date as date_obj
+        visit_date = date_obj.fromisoformat(visit_date_str) if visit_date_str else date_obj.today()
+        
+        if source == "queue-times":
+            plan = await queue_times_service.optimize_park_plan(
+                park_id, selected_attractions, visit_date, arrival_time
+            )
+        elif source == "waittimes-app":
+            plan = await waittimes_app_service.optimize_park_plan(
+                park_id, selected_attractions, visit_date, arrival_time
+            )
+        else:
+            return {"error": "Invalid source. Use 'queue-times' or 'waittimes-app'"}
+        
+        if not plan:
+            return {"error": "Failed to generate optimized plan"}
+        
+        return plan
+        
+    except Exception as e:
+        logger.error(f"Error optimizing theme park plan: {e}")
+        return {"error": f"Failed to optimize plan: {str(e)}"}
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
