@@ -43,7 +43,7 @@ class WaitTimesAppService:
         self.client = httpx.AsyncClient(
             timeout=30.0,
             headers={
-                'User-Agent': 'TravelMate-Pro/1.0',
+                'User-Agent': 'Dream-Travels/1.0',
                 'Accept': 'application/json'
             }
         )
