@@ -10,7 +10,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
       <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">TravelMate Pro</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">Dream Travels</h1>
           <p className="text-xl md:text-2xl mb-8">
             Your ultimate travel companion with itinerary planning and theme park optimization
           </p>
