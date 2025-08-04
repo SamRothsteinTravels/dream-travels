@@ -31,7 +31,7 @@ class EnhancedThemeParkService:
     async def __aenter__(self):
         self.session = httpx.AsyncClient(
             timeout=httpx.Timeout(30),
-            headers={'User-Agent': 'TravelMate-Pro/1.0'}
+            headers={'User-Agent': 'Dream-Travels/1.0'}
         )
         return self
     
