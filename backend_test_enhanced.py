@@ -428,7 +428,7 @@ def test_export_functionality():
 
 def main():
     """Run all enhanced backend API tests"""
-    print("Starting Enhanced Backend API Tests for TravelMate Pro")
+    print("Starting Enhanced Backend API Tests for Dream Travels")
     print(f"Backend URL: {BACKEND_URL}")
     
     # Test 1: Enhanced Destinations Endpoint
