@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Enhanced Backend API Testing Script for TravelMate Pro
+Enhanced Backend API Testing Script for Dream Travels
 Tests the enhanced destinations, interests, itinerary generation, and export endpoints
 """
 
