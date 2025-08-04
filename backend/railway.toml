@@ -8,6 +8,6 @@ restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
 
 [env]
-MONGO_URL = { $value = "mongodb+srv://65willswat:rodxa4-hebdoc-qiwFyz@cluster0.yin7cfx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" }
+MONGO_URL = { $value = "mongodb+srv://65willswat:LKoeqH6EW1YLCfLN@cluster0.yin7cfx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" }
 DB_NAME = { $value = "dream_travels_db" }
 PORT = { $value = "8001" }
