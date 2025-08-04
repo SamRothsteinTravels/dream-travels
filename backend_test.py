@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend API Testing Script for TravelMate Pro
+Comprehensive Backend API Testing Script for Dream Travels
 Tests all updated API integrations now that WaitTimesApp is using the real API:
 1. Updated WaitTimesApp Integration (Real API with 45+ parks)
 2. Travel Blog Scraping Service
