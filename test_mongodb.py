@@ -10,7 +10,7 @@ async def test_mongodb_connection():
     """Test the MongoDB Atlas connection"""
     
     # Your MongoDB connection string
-    MONGO_URL = "mongodb+srv://65willswat:rodxa4hebdocqiwFyz@cluster0.yin7cfx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    MONGO_URL = "mongodb+srv://65willswat:LKoeqH6EW1YLCfLN@cluster0.yin7cfx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     DB_NAME = "dream_travels_db"
     
     try:
