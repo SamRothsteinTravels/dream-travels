@@ -116,6 +116,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ POST /api/generate-destination-data endpoint tested successfully. Scraped 47 activities for Paris with museums and dining hot spots from multiple travel blogs (awanderlustforlife, toeuropeandbeyond, nomadic_matt). Returns proper JSON structure with activities, restaurants, local tips, and safety info. Replaces Google Places API functionality."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE LONDON TEST: Successfully scraped 45 activities for London with historic landmarks and museums interests. Retrieved data from 3 travel blog sources (awanderlustforlife, toeuropeandbeyond, nomadic_matt). Returns 20 activities, 10 restaurants, 8 local tips with proper categorization and descriptions. Real travel blog content confirmed working perfectly."
 
   - task: "Queue Times Parks Integration"
     implemented: true
