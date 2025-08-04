@@ -102,32 +102,92 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the travel itinerary backend API: 1. First test the available destinations endpoint: GET /api/available-destinations 2. Then test generating an itinerary with these parameters: destination: 'Orlando, FL', interests: ['theme parks', 'family friendly', 'dining hot spots'], number_of_days: 3"
+user_problem_statement: "Replace Google Places API with travel blog scraping and replace thrill-data.com with queue-times.com + WaitTimesApp for theme park data. Test all new API integrations."
 
 backend:
-  - task: "Available Destinations API Endpoint"
+  - task: "Travel Blog Scraping Integration"
     implemented: true
     working: true
-    file: "/app/backend/server.py"
+    file: "/app/backend/travel_blog_service.py"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ GET /api/available-destinations endpoint tested successfully. Returns proper JSON structure with 3 destinations including Orlando, FL. Response includes name, key, and description fields for each destination. API responds with 200 status code and proper CORS headers."
+        comment: "✅ POST /api/generate-destination-data endpoint tested successfully. Scraped 47 activities for Paris with museums and dining hot spots from multiple travel blogs (awanderlustforlife, toeuropeandbeyond, nomadic_matt). Returns proper JSON structure with activities, restaurants, local tips, and safety info. Replaces Google Places API functionality."
 
-  - task: "Generate Itinerary API Endpoint"
+  - task: "Queue Times Parks Integration"
     implemented: true
     working: true
-    file: "/app/backend/server.py"
+    file: "/app/backend/queue_times_service.py"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ POST /api/generate-itinerary endpoint tested successfully with Orlando, FL destination and 3 interests (theme parks, family friendly, dining hot spots) for 3 days. Generated proper itinerary structure with 7 total activities distributed across 3 days. All required fields present: id, destination, interests, days, created_at. Each day contains proper activities with geographic clustering (Day 1: Disney area, Day 2: Universal/I-Drive area, Day 3: South Orlando). All requested interests covered in the itinerary. Activities include proper location coordinates, descriptions, durations, and timing recommendations."
+        comment: "✅ GET /api/theme-parks/queue-times endpoint tested successfully. Connected to queue-times.com free API and retrieved 133 theme parks worldwide from companies like Cedar Fair, Disney, Universal. Proper JSON response with park names, IDs, countries, and company information."
+
+  - task: "Queue Times Wait Times Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/queue_times_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/theme-parks/wdw_magic_kingdom/wait-times?source=queue-times endpoint tested successfully. Retrieved real-time wait times for 44 attractions at Magic Kingdom with 37 open attractions, average wait 25.9 minutes, max wait 60 minutes. Includes attraction status, land assignments, and proper data structure."
+
+  - task: "WaitTimesApp Parks Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/waittimes_app_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/theme-parks/waittimes-app endpoint tested successfully. Returns 3 international parks (Europa-Park, Phantasialand, Efteling) with proper mock data structure. Gracefully handles missing API keys by falling back to demonstration data for European theme parks."
+
+  - task: "WaitTimesApp Wait Times Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/waittimes_app_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/theme-parks/europa_park/wait-times?source=waittimes-app endpoint tested successfully. Retrieved wait times for 2 attractions at Europa-Park with average 41.5 minutes wait. Includes attraction types, operational status, and proper JSON response structure using mock data."
+
+  - task: "Crowd Predictions Integration" 
+    implemented: true
+    working: true
+    file: "/app/backend/queue_times_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ GET /api/theme-parks/wdw_magic_kingdom/crowd-predictions?source=queue-times endpoint tested successfully. Derived crowd level (3/10 - Light) from wait time data with 0.7 confidence. Provides peak times recommendations and best visit times based on current wait statistics."
+
+  - task: "Park Plan Optimization Integration"
+    implemented: true
+    working: true
+    file: "/app/backend/queue_times_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POST /api/theme-parks/wdw_magic_kingdom/optimize-plan endpoint tested successfully. Accepts selected attractions, visit date, and arrival time parameters. Returns optimized touring plan with timing recommendations based on current wait times and crowd predictions."
 
 frontend:
 
