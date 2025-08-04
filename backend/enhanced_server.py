@@ -64,11 +64,11 @@ class Activity(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     category: str
-    description: str
-    location: Dict[str, float]  # {"lat": float, "lng": float}
-    address: str
-    estimated_duration: str
-    best_time: str
+    description: str = ""
+    location: Dict[str, float] = {"lat": 0.0, "lng": 0.0}  # Default location
+    address: str = ""
+    estimated_duration: str = "2-3 hours"  # Default duration
+    best_time: str = "Any time"
     image_url: Optional[str] = None
     solo_female_notes: Optional[str] = None
     safety_rating: Optional[int] = None
