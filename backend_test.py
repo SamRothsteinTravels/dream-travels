@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Enhanced Backend API Testing Script for TravelMate Pro
-Tests the new backend API integrations that replace Google Places and thrill-data.com:
-1. Travel blog scraping endpoint
-2. Queue Times integration
-3. WaitTimesApp integration
-4. Crowd predictions
-5. Park plan optimization
+Comprehensive Backend API Testing Script for TravelMate Pro
+Tests all updated API integrations now that WaitTimesApp is using the real API:
+1. Updated WaitTimesApp Integration (Real API with 45+ parks)
+2. Travel Blog Scraping Service
+3. Queue Times Integration
+4. Cross-Source Comparison
+5. Error Handling and Rate Limiting
 """
 
 import requests
 import json
 import sys
+import time
 from typing import Dict, Any
 
 # Get backend URL from environment
