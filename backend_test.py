@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """
 Enhanced Backend API Testing Script for TravelMate Pro
-Tests the enhanced destinations, interests, itinerary generation, and export endpoints
+Tests the new backend API integrations that replace Google Places and thrill-data.com:
+1. Travel blog scraping endpoint
+2. Queue Times integration
+3. WaitTimesApp integration
+4. Crowd predictions
+5. Park plan optimization
 """
 
 import requests
