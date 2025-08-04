@@ -365,7 +365,7 @@ function EnhancedApp() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              TravelMate Pro
+              Dream Travels
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-4xl mx-auto">
               Discover the world safely with personalized itineraries, solo female traveler guides, 
