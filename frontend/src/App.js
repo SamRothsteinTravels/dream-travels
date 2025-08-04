@@ -82,7 +82,7 @@ function App() {
         
         <div className="text-center mt-12">
           <p className="text-gray-500">
-            🚀 <strong>NEW:</strong> Theme Park Planner with crowd prediction technology powered by thrill-data.com
+            🚀 <strong>POWERED BY:</strong> Real-time data from 178 theme parks worldwide via Queue Times & WaitTimesApp APIs
           </p>
         </div>
       </div>
