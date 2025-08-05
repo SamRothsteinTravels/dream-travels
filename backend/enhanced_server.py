@@ -25,10 +25,26 @@ from waittimes_app_service import WaitTimesAppService
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# MongoDB connection with fallback
+try:
+    mongo_url = os.environ.get('MONGO_URL')
+    if not mongo_url:
+        # Fallback for local development
+        load_dotenv(ROOT_DIR / '.env')
+        mongo_url = os.environ['MONGO_URL']
+    
+    client = AsyncIOMotorClient(mongo_url)
+    db_name = os.environ.get('DB_NAME', 'dream_travels_db')
+    db = client[db_name]
+    
+    # Test the connection
+    print(f"MongoDB connected to: {db_name}")
+    
+except Exception as e:
+    print(f"MongoDB connection error: {e}")
+    # Continue without database for now
+    client = None
+    db = None
 
 # Initialize services
 theme_park_service = ThemeParkService(client)
