@@ -555,6 +555,55 @@ SAMPLE_ACTIVITIES = {
         {"name": "Tsukiji Outer Market", "category": "dining hot spots", "duration": "2 hours"},
         {"name": "Imperial Palace Gardens", "category": "outdoor", "duration": "1.5 hours"},
         {"name": "Shibuya Crossing", "category": "family friendly", "duration": "1 hour"}
+    ],
+    "new_york": [
+        {"name": "Metropolitan Museum of Art", "category": "museums", "duration": "3-4 hours"},
+        {"name": "Central Park Walk", "category": "outdoor", "duration": "2-3 hours"},
+        {"name": "Statue of Liberty", "category": "historic landmarks", "duration": "4 hours"},
+        {"name": "Times Square Experience", "category": "family friendly", "duration": "2 hours"},
+        {"name": "Chelsea Market Food Tour", "category": "dining hot spots", "duration": "2 hours"}
+    ],
+    "rome": [
+        {"name": "Colosseum Tour", "category": "historic landmarks", "duration": "2-3 hours"},
+        {"name": "Vatican Museums", "category": "museums", "duration": "3-4 hours"},
+        {"name": "Trevi Fountain Visit", "category": "historic landmarks", "duration": "1 hour"},
+        {"name": "Trastevere Food Tour", "category": "dining hot spots", "duration": "3 hours"},
+        {"name": "Roman Forum Walk", "category": "historic landmarks", "duration": "2 hours"}
+    ],
+    "sydney": [
+        {"name": "Sydney Opera House Tour", "category": "historic landmarks", "duration": "2 hours"},
+        {"name": "Bondi Beach", "category": "beaches", "duration": "3-4 hours"},
+        {"name": "Harbour Bridge Climb", "category": "outdoor", "duration": "3 hours"},
+        {"name": "Royal Botanic Gardens", "category": "outdoor", "duration": "2 hours"},
+        {"name": "The Rocks Market", "category": "dining hot spots", "duration": "2 hours"}
+    ],
+    "barcelona": [
+        {"name": "Sagrada Familia", "category": "historic landmarks", "duration": "2 hours"},
+        {"name": "Park Güell", "category": "outdoor", "duration": "2-3 hours"},
+        {"name": "Gothic Quarter Walk", "category": "historic landmarks", "duration": "2 hours"},
+        {"name": "La Boqueria Market", "category": "dining hot spots", "duration": "1-2 hours"},
+        {"name": "Barceloneta Beach", "category": "beaches", "duration": "3 hours"}
+    ],
+    "amsterdam": [
+        {"name": "Anne Frank House", "category": "museums", "duration": "2 hours"},
+        {"name": "Canal Cruise", "category": "scenic drives", "duration": "1.5 hours"},
+        {"name": "Van Gogh Museum", "category": "museums", "duration": "2-3 hours"},
+        {"name": "Jordaan District Walk", "category": "outdoor", "duration": "2 hours"},
+        {"name": "Albert Cuyp Market", "category": "dining hot spots", "duration": "1-2 hours"}
+    ],
+    "berlin": [
+        {"name": "Brandenburg Gate", "category": "historic landmarks", "duration": "1 hour"},
+        {"name": "Museum Island", "category": "museums", "duration": "4 hours"},
+        {"name": "East Side Gallery", "category": "historic landmarks", "duration": "2 hours"},
+        {"name": "Tiergarten Park", "category": "outdoor", "duration": "2-3 hours"},
+        {"name": "Hackescher Markt Food Scene", "category": "dining hot spots", "duration": "2 hours"}
+    ],
+    "singapore": [
+        {"name": "Gardens by the Bay", "category": "outdoor", "duration": "3 hours"},
+        {"name": "Marina Bay Sands SkyPark", "category": "scenic drives", "duration": "1 hour"},
+        {"name": "Chinatown Heritage Centre", "category": "museums", "duration": "1.5 hours"},
+        {"name": "Hawker Center Food Tour", "category": "dining hot spots", "duration": "2 hours"},
+        {"name": "Singapore Zoo", "category": "family friendly", "duration": "4 hours"}
     ]
 }
 
