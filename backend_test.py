@@ -16,7 +16,7 @@ import time
 from typing import Dict, Any
 
 # Get backend URL from environment
-BACKEND_URL = "https://0ab3f2ef-9dd3-4f76-8714-d6d5aee30e46.preview.emergentagent.com"
+BACKEND_URL = "https://b9e0b037-88d9-486a-9164-512092719ad2.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 # Global variable to store European parks for testing
