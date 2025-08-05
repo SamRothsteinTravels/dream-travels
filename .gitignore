@@ -31,7 +31,16 @@ dist/
 dist
 
 # Environment files (comprehensive coverage)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+frontend/.env
 
+# Sensitive configuration files
+railway.toml
 *token.json*
 *credentials.json*
 
