@@ -120,6 +120,18 @@ backend:
         agent: "testing"
         comment: "✅ COMPREHENSIVE LONDON TEST: Successfully scraped 45 activities for London with historic landmarks and museums interests. Retrieved data from 3 travel blog sources (awanderlustforlife, toeuropeandbeyond, nomadic_matt). Returns 20 activities, 10 restaurants, 8 local tips with proper categorization and descriptions. Real travel blog content confirmed working perfectly."
 
+  - task: "Render Deployment Docker Conflict Fix"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/Procfile, /app/backend/railway.toml, /app/backend/railway.json"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Removed railway.toml and railway.json files that were causing Render to default to Docker deployment instead of Python auto-detection. Updated Procfile to point to enhanced_server:app instead of fast_server:app. This should allow Render to properly detect and deploy as Python application using requirements_minimal.txt and Procfile."
+
   - task: "Queue Times Parks Integration"
     implemented: true
     working: true
