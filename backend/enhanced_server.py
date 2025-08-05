@@ -46,11 +46,26 @@ except Exception as e:
     client = None
     db = None
 
-# Initialize services
-theme_park_service = ThemeParkService(client)
-travel_blog_service = TravelBlogService(client) 
-queue_times_service = QueueTimesService(client)
-waittimes_app_service = WaitTimesAppService(client)
+# Initialize services with error handling
+try:
+    if client:
+        theme_park_service = ThemeParkService(client)
+        travel_blog_service = TravelBlogService(client) 
+        queue_times_service = QueueTimesService(client)
+        waittimes_app_service = WaitTimesAppService(client)
+        print("All services initialized successfully")
+    else:
+        print("Warning: Services not initialized due to database connection issues")
+        theme_park_service = None
+        travel_blog_service = None
+        queue_times_service = None
+        waittimes_app_service = None
+except Exception as e:
+    print(f"Service initialization error: {e}")
+    theme_park_service = None
+    travel_blog_service = None
+    queue_times_service = None
+    waittimes_app_service = None
 
 # Create the main app without a prefix
 app = FastAPI(title="Dream Travels", description="Advanced Travel Itinerary Builder")
