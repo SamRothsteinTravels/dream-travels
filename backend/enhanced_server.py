@@ -777,4 +777,32 @@ async def shutdown_db_client():
 # Health check
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "timestamp": datetime.utcnow()}
+    return {
+        "status": "healthy", 
+        "timestamp": datetime.utcnow().isoformat(),
+        "services": {
+            "database": "connected" if client else "disconnected",
+            "theme_parks": "initialized" if theme_park_service else "not initialized",
+            "travel_blogs": "initialized" if travel_blog_service else "not initialized"
+        }
+    }
+
+# Root endpoint
+@app.get("/")
+async def root():
+    return {
+        "message": "Dream Travels API is running",
+        "version": "1.0.0",
+        "endpoints": {
+            "health": "/health",
+            "api_docs": "/docs",
+            "destinations": "/api/destinations",
+            "interests": "/api/interests",
+            "theme_parks": "/api/theme-parks/queue-times"
+        }
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8001))
+    uvicorn.run(app, host="0.0.0.0", port=port)
