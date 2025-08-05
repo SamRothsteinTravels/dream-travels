@@ -171,8 +171,16 @@ function EnhancedApp() {
       if (filters.hidden_gems) params.append('hidden_gems', 'true');
 
       const response = await axios.get(`${API}/destinations?${params.toString()}`);
-      setDestinations(response.data.destinations);
-      setFilteredDestinations(response.data.destinations);
+      
+      // Convert destinations object to array with keys
+      const destinationsData = response.data.destinations;
+      const destinationsArray = Object.keys(destinationsData).map(key => ({
+        key: key,
+        ...destinationsData[key]
+      }));
+      
+      setDestinations(destinationsArray);
+      setFilteredDestinations(destinationsArray);
     } catch (error) {
       console.error("Error fetching destinations:", error);
     } finally {
