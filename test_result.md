@@ -261,6 +261,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ Frontend successfully integrated with new travel blog scraping backend. Tested destination loading (11 destinations from /api/destinations), interest selection, and itinerary generation using /api/generate-itinerary endpoint. UI properly displays destinations with safety ratings, hidden gem indicators, and solo female travel features. Travel blog data integration confirmed through API testing - Paris generates activities from Louvre Museum with proper location data, duration estimates, and solo female safety notes."
+      - working: true
+        agent: "testing"
+        comment: "✅ RUNTIME ERROR FIX VERIFIED: Successfully tested the fix for 'filteredDestinations.map is not a function' error. Clicked 'Start Planning' button and confirmed 10 destination cards load properly without runtime errors. Destinations display correctly with safety badges (2 found), hidden gem indicators (2 found), and proper content. Destination selection works perfectly with visual feedback (blue border/background). 'Continue to Interests' button appears after selection. No 'filteredDestinations.map is not a function' errors found in console logs. The backend object-to-array conversion fix in lines 176-183 of EnhancedApp.js is working correctly. Minor: 2 network errors for missing /api/cities-and-regions endpoint but core functionality unaffected."
 
   - task: "Theme Park Planner Frontend Integration"
     implemented: true
