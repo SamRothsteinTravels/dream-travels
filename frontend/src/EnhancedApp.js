@@ -366,7 +366,7 @@ function EnhancedApp() {
 
   const resetApp = () => {
     setCurrentStep('destinations');
-    setSelectedDestination(null);
+    setSelectedDestinations([]);
     setSelectedInterests([]);
     setTravelDates([]);
     setNumberOfDays("");
