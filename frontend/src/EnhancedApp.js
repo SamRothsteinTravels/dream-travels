@@ -430,7 +430,94 @@ function EnhancedApp() {
     }
   };
 
-  const resetApp = () => {
+  // Client-side activity optimization function
+  const optimizeActivitiesByLocation = (activities) => {
+    if (!activities || activities.length === 0) return [];
+    
+    // Separate day trips from city activities
+    const cityActivities = activities.filter(a => a.type !== 'day_trip');
+    const dayTrips = activities.filter(a => a.type === 'day_trip');
+    
+    const optimizedDays = [];
+    
+    // Day trips get their own dedicated days
+    dayTrips.forEach(dayTrip => {
+      optimizedDays.push({
+        day: optimizedDays.length + 1,
+        activities: [dayTrip],
+        theme: `🚌 Day Trip to ${dayTrip.location}`,
+        primaryZone: 'Day Trip',
+        estimatedHours: dayTrip.duration.includes('Full') ? 8 : 4
+      });
+    });
+    
+    // Group city activities by zone for efficient routing
+    const zoneGroups = {};
+    cityActivities.forEach(activity => {
+      const zone = activity.zone || 'Central';
+      if (!zoneGroups[zone]) {
+        zoneGroups[zone] = [];
+      }
+      zoneGroups[zone].push(activity);
+    });
+    
+    // Create optimized city days
+    const remainingActivities = [...cityActivities];
+    
+    while (remainingActivities.length > 0) {
+      const dailyActivities = [];
+      let dailyHours = 0;
+      const maxDailyHours = 8;
+      
+      // Start with morning activities in central areas
+      const morningCentral = remainingActivities.filter(a => 
+        a.optimal_time === 'morning' && 
+        (a.zone === 'Central' || a.zone === 'Midtown')
+      );
+      
+      let startActivity = morningCentral[0] || remainingActivities[0];
+      if (startActivity) {
+        dailyActivities.push(startActivity);
+        remainingActivities.splice(remainingActivities.indexOf(startActivity), 1);
+        dailyHours += getActivityHours(startActivity);
+      }
+      
+      // Add nearby activities from the same zone
+      const currentZone = startActivity?.zone || 'Central';
+      const sameZoneActivities = remainingActivities.filter(a => a.zone === currentZone);
+      
+      sameZoneActivities.forEach(activity => {
+        const activityHours = getActivityHours(activity);
+        if (dailyHours + activityHours <= maxDailyHours) {
+          dailyActivities.push(activity);
+          remainingActivities.splice(remainingActivities.indexOf(activity), 1);
+          dailyHours += activityHours;
+        }
+      });
+      
+      if (dailyActivities.length > 0) {
+        optimizedDays.push({
+          day: optimizedDays.length + 1,
+          activities: dailyActivities,
+          theme: `🏛️ Explore ${currentZone} ${dailyActivities[0].city_name}`,
+          primaryZone: currentZone,
+          estimatedHours: dailyHours
+        });
+      }
+    }
+    
+    return optimizedDays;
+  };
+  
+  const getActivityHours = (activity) => {
+    const duration = activity.duration || '2 hours';
+    if (duration.includes('3-4')) return 3.5;
+    if (duration.includes('2-3')) return 2.5;
+    if (duration.includes('1-2')) return 1.5;
+    if (duration.includes('Full')) return 8;
+    if (duration.includes('Half')) return 4;
+    return 2;
+  };
     setCurrentStep('destinations');
     setSelectedDestinations([]);
     setSelectedInterests([]);
