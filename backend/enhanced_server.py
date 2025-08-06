@@ -633,11 +633,54 @@ async def health_check():
     }
 
 @app.get("/api/destinations")
-async def get_destinations():
+async def get_destinations(
+    region: str = None,
+    city: str = None, 
+    solo_female_safe: bool = False,
+    hidden_gems: bool = False
+):
+    filtered_destinations = {}
+    
+    for key, destination in DESTINATIONS.items():
+        # Apply filters
+        include_destination = True
+        
+        # Region filter (map frontend regions to backend continents)
+        if region:
+            region_mapping = {
+                "North America": "North America",
+                "Europe": "Europe", 
+                "Asia": "Asia",
+                "Australia": "Australia",
+                "South America": "South America",
+                "Africa": "Africa"
+            }
+            expected_continent = region_mapping.get(region)
+            if expected_continent and destination.get("continent") != expected_continent:
+                include_destination = False
+        
+        # City filter (partial name matching)
+        if city and city.lower() != "all cities":
+            if city.lower() not in destination.get("name", "").lower():
+                include_destination = False
+        
+        # Solo female safe filter (4+ rating)
+        if solo_female_safe:
+            if destination.get("solo_female_rating", 0) < 4:
+                include_destination = False
+                
+        # Hidden gems filter
+        if hidden_gems:
+            if not destination.get("hidden_gem", False):
+                include_destination = False
+        
+        if include_destination:
+            filtered_destinations[key] = destination
+    
     return {
-        "destinations": DESTINATIONS,
-        "count": len(DESTINATIONS),
-        "message": "Available destinations for travel planning"
+        "destinations": filtered_destinations,
+        "count": len(filtered_destinations),
+        "message": f"Available destinations for travel planning (filtered: {len(filtered_destinations)} of {len(DESTINATIONS)})"
     }
 
 @app.get("/api/interests")
