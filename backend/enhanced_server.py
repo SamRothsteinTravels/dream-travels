@@ -631,77 +631,195 @@ DESTINATIONS = {
     }
 }
 
-# Sample activities for each destination
+# Comprehensive activities database with day trips for each destination
 SAMPLE_ACTIVITIES = {
     "paris": [
-        {"name": "Louvre Museum", "category": "museums", "duration": "3-4 hours"},
-        {"name": "Eiffel Tower", "category": "historic landmarks", "duration": "2 hours"},
-        {"name": "Notre-Dame Cathedral", "category": "historic landmarks", "duration": "1 hour"},
-        {"name": "Champs-Élysées Shopping", "category": "dining hot spots", "duration": "2-3 hours"},
-        {"name": "Seine River Cruise", "category": "scenic drives", "duration": "1.5 hours"}
+        # Main City Activities
+        {"name": "Louvre Museum", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "1st Arrondissement"},
+        {"name": "Eiffel Tower", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "7th Arrondissement"},
+        {"name": "Notre-Dame Cathedral", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Île de la Cité"},
+        {"name": "Champs-Élysées Shopping", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "8th Arrondissement"},
+        {"name": "Seine River Cruise", "category": "scenic drives", "duration": "1.5 hours", "type": "city", "location": "Various Docks"},
+        {"name": "Montmartre & Sacré-Cœur", "category": "historic landmarks", "duration": "3 hours", "type": "city", "location": "18th Arrondissement"},
+        {"name": "Musée d'Orsay", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "7th Arrondissement"},
+        {"name": "Latin Quarter Walking Tour", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "5th Arrondissement"},
+        {"name": "Le Marais District", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "3rd & 4th Arrondissements"},
+        {"name": "Tuileries Garden", "category": "outdoor", "duration": "1-2 hours", "type": "city", "location": "1st Arrondissement"},
+        
+        # Day Trips from Paris
+        {"name": "Palace of Versailles", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "40 min by train from Paris"},
+        {"name": "Château de Fontainebleau", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Paris"},
+        {"name": "Giverny & Monet's Garden", "category": "museums", "duration": "Half day", "type": "day_trip", "location": "1.5 hours from Paris"},
+        {"name": "Champagne Region (Reims)", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from Paris"},
+        {"name": "Château de Chantilly", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Paris"}
     ],
+    
     "london": [
-        {"name": "British Museum", "category": "museums", "duration": "3-4 hours"},
-        {"name": "Tower of London", "category": "historic landmarks", "duration": "2-3 hours"},
-        {"name": "Westminster Abbey", "category": "historic landmarks", "duration": "1.5 hours"},
-        {"name": "Borough Market", "category": "dining hot spots", "duration": "1-2 hours"},
-        {"name": "Thames River Walk", "category": "scenic drives", "duration": "2 hours"}
+        # Main City Activities  
+        {"name": "British Museum", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Bloomsbury"},
+        {"name": "Tower of London", "category": "historic landmarks", "duration": "2-3 hours", "type": "city", "location": "Tower Hill"},
+        {"name": "Westminster Abbey", "category": "historic landmarks", "duration": "1.5 hours", "type": "city", "location": "Westminster"},
+        {"name": "Borough Market", "category": "dining hot spots", "duration": "1-2 hours", "type": "city", "location": "London Bridge"},
+        {"name": "Thames River Walk", "category": "scenic drives", "duration": "2 hours", "type": "city", "location": "South Bank"},
+        {"name": "Buckingham Palace", "category": "historic landmarks", "duration": "1-2 hours", "type": "city", "location": "Westminster"},
+        {"name": "Tate Modern", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Bankside"},
+        {"name": "Covent Garden", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "West End"},
+        {"name": "Hyde Park & Speakers' Corner", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Central London"},
+        {"name": "Camden Market", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "Camden Town"},
+        
+        # Day Trips from London
+        {"name": "Stonehenge", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from London"},
+        {"name": "Windsor Castle", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "1 hour from London"},
+        {"name": "Bath Roman Baths", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from London"},
+        {"name": "Canterbury Cathedral", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from London"},
+        {"name": "Brighton Beach", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "1 hour from London"},
+        {"name": "Oxford University Tour", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from London"},
+        {"name": "Stratford-upon-Avon", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from London"}
     ],
-    "tokyo": [
-        {"name": "Senso-ji Temple", "category": "historic landmarks", "duration": "2 hours"},
-        {"name": "Tokyo National Museum", "category": "museums", "duration": "3 hours"},
-        {"name": "Tsukiji Outer Market", "category": "dining hot spots", "duration": "2 hours"},
-        {"name": "Imperial Palace Gardens", "category": "outdoor", "duration": "1.5 hours"},
-        {"name": "Shibuya Crossing", "category": "family friendly", "duration": "1 hour"}
-    ],
+    
     "new_york": [
-        {"name": "Metropolitan Museum of Art", "category": "museums", "duration": "3-4 hours"},
-        {"name": "Central Park Walk", "category": "outdoor", "duration": "2-3 hours"},
-        {"name": "Statue of Liberty", "category": "historic landmarks", "duration": "4 hours"},
-        {"name": "Times Square Experience", "category": "family friendly", "duration": "2 hours"},
-        {"name": "Chelsea Market Food Tour", "category": "dining hot spots", "duration": "2 hours"}
+        # Manhattan Activities
+        {"name": "Metropolitan Museum of Art", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Upper East Side"},
+        {"name": "Central Park Walk", "category": "outdoor", "duration": "2-3 hours", "type": "city", "location": "Manhattan"},
+        {"name": "Statue of Liberty", "category": "historic landmarks", "duration": "4 hours", "type": "city", "location": "Liberty Island"},
+        {"name": "Times Square Experience", "category": "family friendly", "duration": "2 hours", "type": "city", "location": "Midtown"},
+        {"name": "Chelsea Market Food Tour", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Chelsea"},
+        {"name": "9/11 Memorial & Museum", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Lower Manhattan"},
+        {"name": "High Line Park", "category": "outdoor", "duration": "1-2 hours", "type": "city", "location": "West Side"},
+        {"name": "Broadway Show", "category": "family friendly", "duration": "3 hours", "type": "city", "location": "Theater District"},
+        {"name": "Brooklyn Bridge Walk", "category": "outdoor", "duration": "1 hour", "type": "city", "location": "Manhattan/Brooklyn"},
+        
+        # Day Trips from NYC
+        {"name": "Brooklyn Neighborhoods Tour", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "30 min from Manhattan"},
+        {"name": "The Hamptons", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "2-3 hours from NYC"},
+        {"name": "Woodbury Common Outlets", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1 hour from NYC"},
+        {"name": "West Point Military Academy", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from NYC"},
+        {"name": "Fire Island", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "2 hours from NYC"},
+        {"name": "Philadelphia", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from NYC"}
     ],
+    
+    "tokyo": [
+        # Main City Activities
+        {"name": "Senso-ji Temple", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Asakusa"},
+        {"name": "Tokyo National Museum", "category": "museums", "duration": "3 hours", "type": "city", "location": "Ueno"},
+        {"name": "Tsukiji Outer Market", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Tsukiji"},
+        {"name": "Imperial Palace Gardens", "category": "outdoor", "duration": "1.5 hours", "type": "city", "location": "Central Tokyo"},
+        {"name": "Shibuya Crossing", "category": "family friendly", "duration": "1 hour", "type": "city", "location": "Shibuya"},
+        {"name": "Meiji Shrine", "category": "historic landmarks", "duration": "1-2 hours", "type": "city", "location": "Harajuku"},
+        {"name": "Tokyo Skytree", "category": "family friendly", "duration": "2 hours", "type": "city", "location": "Sumida"},
+        {"name": "Ginza Shopping", "category": "dining hot spots", "duration": "3 hours", "type": "city", "location": "Ginza"},
+        {"name": "Robot Restaurant Show", "category": "family friendly", "duration": "2 hours", "type": "city", "location": "Shinjuku"},
+        
+        # Day Trips from Tokyo
+        {"name": "Mount Fuji & Hakone", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "2 hours from Tokyo"},
+        {"name": "Nikko Temples", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from Tokyo"},
+        {"name": "Kamakura Great Buddha", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "1 hour from Tokyo"},
+        {"name": "Yokohama Chinatown", "category": "dining hot spots", "duration": "Half day", "type": "day_trip", "location": "45 min from Tokyo"},
+        {"name": "Enoshima Island", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "1 hour from Tokyo"}
+    ],
+    
     "rome": [
-        {"name": "Colosseum Tour", "category": "historic landmarks", "duration": "2-3 hours"},
-        {"name": "Vatican Museums", "category": "museums", "duration": "3-4 hours"},
-        {"name": "Trevi Fountain Visit", "category": "historic landmarks", "duration": "1 hour"},
-        {"name": "Trastevere Food Tour", "category": "dining hot spots", "duration": "3 hours"},
-        {"name": "Roman Forum Walk", "category": "historic landmarks", "duration": "2 hours"}
+        # Main City Activities
+        {"name": "Colosseum Tour", "category": "historic landmarks", "duration": "2-3 hours", "type": "city", "location": "Ancient Rome"},
+        {"name": "Vatican Museums", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Vatican City"},
+        {"name": "Trevi Fountain Visit", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Central Rome"},
+        {"name": "Trastevere Food Tour", "category": "dining hot spots", "duration": "3 hours", "type": "city", "location": "Trastevere"},
+        {"name": "Roman Forum Walk", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Ancient Rome"},
+        {"name": "Pantheon Visit", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Central Rome"},
+        {"name": "Villa Borghese Gardens", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Central Rome"},
+        {"name": "Campo de' Fiori Market", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Central Rome"},
+        
+        # Day Trips from Rome
+        {"name": "Pompeii Archaeological Site", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2.5 hours from Rome"},
+        {"name": "Tivoli Gardens (Villa d'Este)", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "1 hour from Rome"},
+        {"name": "Ostia Antica Ruins", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "45 min from Rome"},
+        {"name": "Frascati Wine Region", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "45 min from Rome"},
+        {"name": "Castel Gandolfo", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "1 hour from Rome"}
     ],
+    
     "sydney": [
-        {"name": "Sydney Opera House Tour", "category": "historic landmarks", "duration": "2 hours"},
-        {"name": "Bondi Beach", "category": "beaches", "duration": "3-4 hours"},
-        {"name": "Harbour Bridge Climb", "category": "outdoor", "duration": "3 hours"},
-        {"name": "Royal Botanic Gardens", "category": "outdoor", "duration": "2 hours"},
-        {"name": "The Rocks Market", "category": "dining hot spots", "duration": "2 hours"}
+        # Main City Activities
+        {"name": "Sydney Opera House Tour", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Circular Quay"},
+        {"name": "Bondi Beach", "category": "beaches", "duration": "3-4 hours", "type": "city", "location": "Eastern Suburbs"},
+        {"name": "Harbour Bridge Climb", "category": "outdoor", "duration": "3 hours", "type": "city", "location": "Sydney Harbour"},
+        {"name": "Royal Botanic Gardens", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Sydney Harbour"},
+        {"name": "The Rocks Market", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "The Rocks"},
+        {"name": "Darling Harbour", "category": "family friendly", "duration": "3 hours", "type": "city", "location": "Central Sydney"},
+        {"name": "Manly Beach Ferry", "category": "beaches", "duration": "Half day", "type": "city", "location": "Northern Beaches"},
+        
+        # Day Trips from Sydney
+        {"name": "Blue Mountains & Three Sisters", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "2 hours from Sydney"},
+        {"name": "Hunter Valley Wine Region", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "2 hours from Sydney"},
+        {"name": "Jenolan Caves", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "3 hours from Sydney"},
+        {"name": "Port Stephens Dolphins", "category": "family friendly", "duration": "Full day", "type": "day_trip", "location": "2.5 hours from Sydney"}
     ],
+    
     "barcelona": [
-        {"name": "Sagrada Familia", "category": "historic landmarks", "duration": "2 hours"},
-        {"name": "Park Güell", "category": "outdoor", "duration": "2-3 hours"},
-        {"name": "Gothic Quarter Walk", "category": "historic landmarks", "duration": "2 hours"},
-        {"name": "La Boqueria Market", "category": "dining hot spots", "duration": "1-2 hours"},
-        {"name": "Barceloneta Beach", "category": "beaches", "duration": "3 hours"}
+        # Main City Activities
+        {"name": "Sagrada Familia", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Eixample"},
+        {"name": "Park Güell", "category": "outdoor", "duration": "2-3 hours", "type": "city", "location": "Gràcia"},
+        {"name": "Gothic Quarter Walk", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Ciutat Vella"},
+        {"name": "La Boqueria Market", "category": "dining hot spots", "duration": "1-2 hours", "type": "city", "location": "Las Ramblas"},
+        {"name": "Barceloneta Beach", "category": "beaches", "duration": "3 hours", "type": "city", "location": "Barceloneta"},
+        {"name": "Casa Batlló", "category": "historic landmarks", "duration": "1.5 hours", "type": "city", "location": "Passeig de Gràcia"},
+        {"name": "Picasso Museum", "category": "museums", "duration": "2 hours", "type": "city", "location": "Born"},
+        
+        # Day Trips from Barcelona
+        {"name": "Montserrat Monastery", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Barcelona"},
+        {"name": "Costa Brava Beaches", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "1-2 hours from Barcelona"},
+        {"name": "Girona Medieval City", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from Barcelona"},
+        {"name": "Penedès Wine Region", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1 hour from Barcelona"}
     ],
+    
     "amsterdam": [
-        {"name": "Anne Frank House", "category": "museums", "duration": "2 hours"},
-        {"name": "Canal Cruise", "category": "scenic drives", "duration": "1.5 hours"},
-        {"name": "Van Gogh Museum", "category": "museums", "duration": "2-3 hours"},
-        {"name": "Jordaan District Walk", "category": "outdoor", "duration": "2 hours"},
-        {"name": "Albert Cuyp Market", "category": "dining hot spots", "duration": "1-2 hours"}
+        # Main City Activities
+        {"name": "Anne Frank House", "category": "museums", "duration": "2 hours", "type": "city", "location": "Jordaan"},
+        {"name": "Canal Cruise", "category": "scenic drives", "duration": "1.5 hours", "type": "city", "location": "City Center"},
+        {"name": "Van Gogh Museum", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Museum Quarter"},
+        {"name": "Jordaan District Walk", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Jordaan"},
+        {"name": "Albert Cuyp Market", "category": "dining hot spots", "duration": "1-2 hours", "type": "city", "location": "De Pijp"},
+        {"name": "Vondelpark", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Museum Quarter"},
+        {"name": "Red Light District Tour", "category": "historic landmarks", "duration": "1.5 hours", "type": "city", "location": "De Wallen"},
+        
+        # Day Trips from Amsterdam
+        {"name": "Zaanse Schans Windmills", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "45 min from Amsterdam"},
+        {"name": "Keukenhof Gardens (seasonal)", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "1 hour from Amsterdam"},
+        {"name": "Giethoorn Village", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from Amsterdam"},
+        {"name": "Utrecht Historic Center", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "45 min from Amsterdam"}
     ],
+    
     "berlin": [
-        {"name": "Brandenburg Gate", "category": "historic landmarks", "duration": "1 hour"},
-        {"name": "Museum Island", "category": "museums", "duration": "4 hours"},
-        {"name": "East Side Gallery", "category": "historic landmarks", "duration": "2 hours"},
-        {"name": "Tiergarten Park", "category": "outdoor", "duration": "2-3 hours"},
-        {"name": "Hackescher Markt Food Scene", "category": "dining hot spots", "duration": "2 hours"}
+        # Main City Activities
+        {"name": "Brandenburg Gate", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Mitte"},
+        {"name": "Museum Island", "category": "museums", "duration": "4 hours", "type": "city", "location": "Mitte"},
+        {"name": "East Side Gallery", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Friedrichshain"},
+        {"name": "Tiergarten Park", "category": "outdoor", "duration": "2-3 hours", "type": "city", "location": "Central Berlin"},
+        {"name": "Hackescher Markt Food Scene", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Mitte"},
+        {"name": "Checkpoint Charlie", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Mitte"},
+        {"name": "Reichstag Building", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "Mitte"},
+        
+        # Day Trips from Berlin
+        {"name": "Sanssouci Palace, Potsdam", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "45 min from Berlin"},
+        {"name": "Sachsenhausen Memorial", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "1 hour from Berlin"},
+        {"name": "Spreewald Biosphere", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from Berlin"},
+        {"name": "Dresden Historic Center", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from Berlin"}
     ],
+    
     "singapore": [
-        {"name": "Gardens by the Bay", "category": "outdoor", "duration": "3 hours"},
-        {"name": "Marina Bay Sands SkyPark", "category": "scenic drives", "duration": "1 hour"},
-        {"name": "Chinatown Heritage Centre", "category": "museums", "duration": "1.5 hours"},
-        {"name": "Hawker Center Food Tour", "category": "dining hot spots", "duration": "2 hours"},
-        {"name": "Singapore Zoo", "category": "family friendly", "duration": "4 hours"}
+        # Main City Activities
+        {"name": "Gardens by the Bay", "category": "outdoor", "duration": "3 hours", "type": "city", "location": "Marina Bay"},
+        {"name": "Marina Bay Sands SkyPark", "category": "scenic drives", "duration": "1 hour", "type": "city", "location": "Marina Bay"},
+        {"name": "Chinatown Heritage Centre", "category": "museums", "duration": "1.5 hours", "type": "city", "location": "Chinatown"},
+        {"name": "Hawker Center Food Tour", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Various locations"},
+        {"name": "Singapore Zoo", "category": "family friendly", "duration": "4 hours", "type": "city", "location": "Mandai"},
+        {"name": "Orchard Road Shopping", "category": "dining hot spots", "duration": "3 hours", "type": "city", "location": "Orchard"},
+        {"name": "Merlion Park", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Marina Bay"},
+        
+        # Day Trips from Singapore
+        {"name": "Sentosa Island", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "30 min from city center"},
+        {"name": "Bintan Island, Indonesia", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "1 hour ferry from Singapore"},
+        {"name": "Johor Bahru, Malaysia", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1 hour from Singapore"},
+        {"name": "Pulau Ubin Island", "category": "outdoor", "duration": "Full day", "type": "day_trip", "location": "45 min from Singapore"}
     ]
 }
 
