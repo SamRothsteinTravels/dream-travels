@@ -502,7 +502,7 @@ function EnhancedApp() {
               </div>
             )}
 
-            {selectedDestination && (
+            {selectedDestinations.length > 0 && (
               <div className="mt-8 text-center">
                 <button
                   onClick={nextStep}
