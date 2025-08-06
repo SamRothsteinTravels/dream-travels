@@ -320,6 +320,8 @@ function EnhancedApp() {
       }
     });
   };
+
+  const handleDestinationSelect = (destination) => {
     setSelectedDestinations(prev => {
       const isSelected = prev.some(d => d.key === destination.key);
       
