@@ -41,6 +41,40 @@ const SafetyBadge = ({ rating, notes }) => {
   );
 };
 
+const ActivityCard = ({ activity, selected, onToggle }) => (
+  <div 
+    className={`p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+      selected 
+        ? "border-blue-500 bg-blue-50" 
+        : "border-gray-200 hover:border-blue-300"
+    }`}
+    onClick={() => onToggle(activity)}
+  >
+    <div className="flex items-start justify-between">
+      <div className="flex-grow">
+        <h4 className="font-semibold text-gray-900">{activity.name}</h4>
+        <div className="flex items-center space-x-2 mt-1">
+          <span className="text-sm text-blue-600">{activity.location}</span>
+          <span className="text-xs text-gray-500">•</span>
+          <span className="text-sm text-gray-600">{activity.duration}</span>
+        </div>
+        {activity.type === 'day_trip' && (
+          <span className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full mt-2">
+            🚌 Day Trip
+          </span>
+        )}
+      </div>
+      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+        selected 
+          ? "border-blue-500 bg-blue-500" 
+          : "border-gray-300"
+      }`}>
+        {selected && <span className="text-white text-sm">✓</span>}
+      </div>
+    </div>
+  </div>
+);
+
 const DestinationCard = ({ destination, onSelect, selected }) => (
   <div 
     className={`flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:shadow-lg ${
