@@ -911,6 +911,58 @@ async def get_interests():
         "solo_female_notes": "Destinations with safety ratings 3+ recommended for solo female travelers"
     }
 
+@app.get("/api/activities")
+async def get_activities(
+    cities: str = None,  # Comma-separated city keys
+    category: str = None,  # Filter by interest category
+    include_day_trips: bool = True
+):
+    """Get activities for selected cities with optional filtering"""
+    if not cities:
+        return {"activities": {}, "count": 0, "message": "No cities specified"}
+    
+    city_keys = [city.strip() for city in cities.split(',')]
+    all_activities = {}
+    
+    for city_key in city_keys:
+        if city_key in SAMPLE_ACTIVITIES:
+            city_activities = SAMPLE_ACTIVITIES[city_key].copy()
+            
+            # Filter by category if specified
+            if category and category != "all":
+                city_activities = [
+                    activity for activity in city_activities 
+                    if activity.get("category") == category
+                ]
+            
+            # Filter day trips if not wanted
+            if not include_day_trips:
+                city_activities = [
+                    activity for activity in city_activities 
+                    if activity.get("type") != "day_trip"
+                ]
+            
+            # Add city information to each activity
+            for activity in city_activities:
+                activity["city_key"] = city_key
+                activity["city_name"] = DESTINATIONS[city_key]["name"]
+            
+            all_activities[city_key] = city_activities
+    
+    # Count total activities
+    total_count = sum(len(activities) for activities in all_activities.values())
+    
+    return {
+        "activities": all_activities,
+        "count": total_count,
+        "cities": [DESTINATIONS[city_key]["name"] for city_key in city_keys if city_key in DESTINATIONS],
+        "filters": {
+            "category": category,
+            "include_day_trips": include_day_trips
+        },
+        "message": f"Found {total_count} activities across {len(city_keys)} cities"
+    }
+
 @app.post("/api/generate-itinerary") 
 async def generate_itinerary(request: dict):
     destination = request.get("destination", "").lower().replace(" ", "_").replace(",", "")
