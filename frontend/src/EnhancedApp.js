@@ -202,7 +202,7 @@ const FilterSection = ({ filters, onFiltersChange, citiesAndRegions }) => (
 );
 
 function EnhancedApp() {
-  const [currentStep, setCurrentStep] = useState('destinations'); // destinations, interests, dates, itinerary
+  const [currentStep, setCurrentStep] = useState('destinations'); // destinations, interests, activities, dates, itinerary
   const [destinations, setDestinations] = useState([]);
   const [filteredDestinations, setFilteredDestinations] = useState([]);
   const [selectedDestinations, setSelectedDestinations] = useState([]);
