@@ -392,8 +392,8 @@ function EnhancedApp() {
   };
 
   const generateItinerary = async () => {
-    if (selectedDestinations.length === 0 || selectedInterests.length === 0) {
-      alert("Please select a destination and at least one interest!");
+    if (selectedDestinations.length === 0 || selectedActivities.length === 0) {
+      alert("Please select destinations and at least one activity!");
       return;
     }
 
