@@ -496,7 +496,7 @@ function EnhancedApp() {
                     key={destination.key}
                     destination={destination}
                     onSelect={handleDestinationSelect}
-                    selected={selectedDestination?.key === destination.key}
+                    selected={selectedDestinations.some(d => d.key === destination.key)}
                   />
                 ))}
               </div>
