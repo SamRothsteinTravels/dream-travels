@@ -309,7 +309,17 @@ function EnhancedApp() {
     fetchActivities();
   }, [fetchActivities]);
 
-  const handleDestinationSelect = (destination) => {
+  const handleActivityToggle = (activity) => {
+    setSelectedActivities(prev => {
+      const isSelected = prev.some(a => a.name === activity.name && a.city_key === activity.city_key);
+      
+      if (isSelected) {
+        return prev.filter(a => !(a.name === activity.name && a.city_key === activity.city_key));
+      } else {
+        return [...prev, activity];
+      }
+    });
+  };
     setSelectedDestinations(prev => {
       const isSelected = prev.some(d => d.key === destination.key);
       
