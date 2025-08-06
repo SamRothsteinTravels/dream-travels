@@ -43,26 +43,61 @@ const SafetyBadge = ({ rating, notes }) => {
 
 const DestinationCard = ({ destination, onSelect, selected }) => (
   <div 
-    className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${
+    className={`flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 hover:shadow-lg ${
       selected 
         ? "border-blue-500 bg-blue-50 shadow-lg" 
-        : "border-gray-200 hover:border-blue-300 hover:shadow-md"
+        : "border-gray-200 hover:border-blue-300"
     }`}
     onClick={() => onSelect(destination)}
   >
-    <div className="flex items-start justify-between mb-2">
-      <div>
-        <h3 className="font-bold text-lg">{destination.name}</h3>
-        <p className="text-gray-600">{destination.country} • {destination.region}</p>
-        {destination.hidden_gem && (
-          <span className="inline-block px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full mt-1">
-            💎 Hidden Gem
-          </span>
-        )}
+    {/* Destination Image */}
+    <div className="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 mr-4">
+      <img 
+        src={destination.image_url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?crop=entropy&cs=srgb&fm=jpg&q=85'} 
+        alt={destination.iconic_landmark || destination.name}
+        className="w-full h-full object-cover rounded-lg"
+        onError={(e) => {
+          e.target.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?crop=entropy&cs=srgb&fm=jpg&q=85';
+        }}
+      />
+    </div>
+
+    {/* Destination Details */}
+    <div className="flex-grow min-w-0">
+      <div className="flex items-start justify-between mb-2">
+        <div className="flex-grow">
+          <h3 className="font-bold text-xl text-gray-900">{destination.name}</h3>
+          <p className="text-gray-600 font-medium">{destination.country} • {destination.region}</p>
+          <p className="text-sm text-blue-600 font-medium mt-1">📍 {destination.iconic_landmark}</p>
+        </div>
+        
+        {/* Badges */}
+        <div className="flex flex-col items-end space-y-1 ml-4">
+          {destination.hidden_gem && (
+            <span className="inline-block px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
+              💎 Hidden Gem
+            </span>
+          )}
+          <SafetyBadge rating={destination.solo_female_rating} notes={destination.safety_notes} />
+        </div>
+      </div>
+      
+      {/* Description */}
+      <p className="text-sm text-gray-700 leading-relaxed line-clamp-2 md:line-clamp-none">
+        {destination.description}
+      </p>
+    </div>
+
+    {/* Selection Indicator */}
+    <div className="flex-shrink-0 ml-4">
+      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+        selected 
+          ? "border-blue-500 bg-blue-500" 
+          : "border-gray-300"
+      }`}>
+        {selected && <span className="text-white text-sm">✓</span>}
       </div>
     </div>
-    <SafetyBadge rating={destination.solo_female_safety} notes={destination.safety_notes} />
-    <p className="text-sm text-gray-700 leading-relaxed">{destination.description}</p>
   </div>
 );
 
