@@ -550,7 +550,9 @@ function EnhancedApp() {
   const nextStep = () => {
     if (currentStep === 'destinations' && selectedDestinations.length > 0) {
       setCurrentStep('interests');
-    } else if (currentStep === 'interests' && selectedActivities.length > 0) {
+    } else if (currentStep === 'interests' && selectedInterests.length > 0) {
+      setCurrentStep('activities');
+    } else if (currentStep === 'activities' && selectedActivities.length > 0) {
       setCurrentStep('dates');
     }
   };
@@ -558,8 +560,10 @@ function EnhancedApp() {
   const prevStep = () => {
     if (currentStep === 'interests') {
       setCurrentStep('destinations');
-    } else if (currentStep === 'dates') {
+    } else if (currentStep === 'activities') {
       setCurrentStep('interests');
+    } else if (currentStep === 'dates') {
+      setCurrentStep('activities');
     } else if (currentStep === 'itinerary') {
       setCurrentStep('dates');
     }
