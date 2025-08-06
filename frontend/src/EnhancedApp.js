@@ -867,7 +867,118 @@ function EnhancedApp() {
           </div>
         )}
 
-        {/* Step 3: Date Selection */}
+        {/* Step 3: Activity Selection */}
+        {currentStep === 'activities' && (
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-gray-900">
+                🎯 Choose Activities in {selectedDestinations.map(d => d.name).join(' & ')}
+              </h2>
+              <button onClick={prevStep} className="text-gray-500 hover:text-gray-700">
+                ← Back
+              </button>
+            </div>
+
+            {/* Activity Filters */}
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <div className="flex flex-wrap gap-4 items-center">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Interest:</label>
+                  <select
+                    value={activityFilters.category}
+                    onChange={(e) => setActivityFilters(prev => ({ ...prev, category: e.target.value }))}
+                    className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="all">All Categories</option>
+                    <option value="museums">🏛️ Museums</option>
+                    <option value="historic landmarks">🏰 Historic Landmarks</option>
+                    <option value="outdoor">🌳 Outdoor & Parks</option>
+                    <option value="dining hot spots">🍽️ Food & Dining</option>
+                    <option value="beaches">🏖️ Beaches</option>
+                    <option value="family friendly">👨‍👩‍👧‍👦 Family Friendly</option>
+                    <option value="scenic drives">🚗 Scenic Drives</option>
+                  </select>
+                </div>
+                
+                <div className="flex items-center">
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={activityFilters.include_day_trips}
+                      onChange={(e) => setActivityFilters(prev => ({ ...prev, include_day_trips: e.target.checked }))}
+                      className="mr-2 h-4 w-4 text-blue-500"
+                    />
+                    <span className="text-sm font-medium text-gray-700">Include Day Trips</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Activities by City */}
+            <div className="space-y-8">
+              {Object.keys(allActivities).map(cityKey => {
+                const cityActivities = allActivities[cityKey] || [];
+                const cityName = selectedDestinations.find(d => d.key === cityKey)?.name || cityKey;
+                const cityActivitiesInCity = cityActivities.filter(a => a.type === 'city');
+                const dayTrips = cityActivities.filter(a => a.type === 'day_trip');
+                
+                return (
+                  <div key={cityKey} className="border-2 border-gray-100 rounded-xl p-6">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                      📍 {cityName} ({cityActivities.length} activities)
+                    </h3>
+                    
+                    {cityActivitiesInCity.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-gray-800 mb-3">🏙️ In the City</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {cityActivitiesInCity.map((activity, index) => (
+                            <ActivityCard
+                              key={`${activity.name}-${index}`}
+                              activity={activity}
+                              selected={selectedActivities.some(a => a.name === activity.name && a.city_key === activity.city_key)}
+                              onToggle={handleActivityToggle}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {dayTrips.length > 0 && activityFilters.include_day_trips && (
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-3">🚌 Day Trips from {cityName}</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {dayTrips.map((activity, index) => (
+                            <ActivityCard
+                              key={`${activity.name}-${index}`}
+                              activity={activity}
+                              selected={selectedActivities.some(a => a.name === activity.name && a.city_key === activity.city_key)}
+                              onToggle={handleActivityToggle}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Continue Button */}
+            {selectedActivities.length > 0 && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={nextStep}
+                  className="px-8 py-4 bg-gradient-to-r from-green-500 to-blue-600 text-white text-lg font-bold rounded-xl hover:from-green-600 hover:to-blue-700 transition-all duration-200 shadow-lg"
+                >
+                  Continue with {selectedActivities.length} Activities →
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Step 4: Date Selection */}
         {currentStep === 'dates' && (
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center justify-between mb-6">
