@@ -631,71 +631,71 @@ DESTINATIONS = {
     }
 }
 
-# Comprehensive activities database with day trips for each destination
+# Comprehensive activities database with day trips and geographic zones for each destination
 SAMPLE_ACTIVITIES = {
     "paris": [
-        # Main City Activities
-        {"name": "Louvre Museum", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "1st Arrondissement"},
-        {"name": "Eiffel Tower", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "7th Arrondissement"},
-        {"name": "Notre-Dame Cathedral", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Île de la Cité"},
-        {"name": "Champs-Élysées Shopping", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "8th Arrondissement"},
-        {"name": "Seine River Cruise", "category": "scenic drives", "duration": "1.5 hours", "type": "city", "location": "Various Docks"},
-        {"name": "Montmartre & Sacré-Cœur", "category": "historic landmarks", "duration": "3 hours", "type": "city", "location": "18th Arrondissement"},
-        {"name": "Musée d'Orsay", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "7th Arrondissement"},
-        {"name": "Latin Quarter Walking Tour", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "5th Arrondissement"},
-        {"name": "Le Marais District", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "3rd & 4th Arrondissements"},
-        {"name": "Tuileries Garden", "category": "outdoor", "duration": "1-2 hours", "type": "city", "location": "1st Arrondissement"},
+        # Main City Activities with Geographic Zones
+        {"name": "Louvre Museum", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "1st Arrondissement", "zone": "Central", "coordinates": [48.8606, 2.3376], "optimal_time": "morning"},
+        {"name": "Eiffel Tower", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "7th Arrondissement", "zone": "Central", "coordinates": [48.8584, 2.2945], "optimal_time": "afternoon"},
+        {"name": "Notre-Dame Cathedral", "category": "historic landmarks", "duration": "1 hour", "type": "city", "location": "Île de la Cité", "zone": "Central", "coordinates": [48.8530, 2.3499], "optimal_time": "morning"},
+        {"name": "Champs-Élysées Shopping", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "8th Arrondissement", "zone": "Central", "coordinates": [48.8698, 2.3078], "optimal_time": "afternoon"},
+        {"name": "Seine River Cruise", "category": "scenic drives", "duration": "1.5 hours", "type": "city", "location": "Various Docks", "zone": "Central", "coordinates": [48.8566, 2.3522], "optimal_time": "evening"},
+        {"name": "Montmartre & Sacré-Cœur", "category": "historic landmarks", "duration": "3 hours", "type": "city", "location": "18th Arrondissement", "zone": "North", "coordinates": [48.8867, 2.3431], "optimal_time": "morning"},
+        {"name": "Musée d'Orsay", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "7th Arrondissement", "zone": "Central", "coordinates": [48.8600, 2.3266], "optimal_time": "afternoon"},
+        {"name": "Latin Quarter Walking Tour", "category": "historic landmarks", "duration": "2 hours", "type": "city", "location": "5th Arrondissement", "zone": "Central", "coordinates": [48.8499, 2.3465], "optimal_time": "morning"},
+        {"name": "Le Marais District", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "3rd & 4th Arrondissements", "zone": "East", "coordinates": [48.8566, 2.3622], "optimal_time": "afternoon"},
+        {"name": "Tuileries Garden", "category": "outdoor", "duration": "1-2 hours", "type": "city", "location": "1st Arrondissement", "zone": "Central", "coordinates": [48.8634, 2.3275], "optimal_time": "morning"},
         
         # Day Trips from Paris
-        {"name": "Palace of Versailles", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "40 min by train from Paris"},
-        {"name": "Château de Fontainebleau", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Paris"},
-        {"name": "Giverny & Monet's Garden", "category": "museums", "duration": "Half day", "type": "day_trip", "location": "1.5 hours from Paris"},
-        {"name": "Champagne Region (Reims)", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from Paris"},
-        {"name": "Château de Chantilly", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Paris"}
+        {"name": "Palace of Versailles", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "40 min by train from Paris", "zone": "Day Trip", "coordinates": [48.8049, 2.1204], "optimal_time": "full_day"},
+        {"name": "Château de Fontainebleau", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Paris", "zone": "Day Trip", "coordinates": [48.4021, 2.7000], "optimal_time": "full_day"},
+        {"name": "Giverny & Monet's Garden", "category": "museums", "duration": "Half day", "type": "day_trip", "location": "1.5 hours from Paris", "zone": "Day Trip", "coordinates": [49.0750, 1.5336], "optimal_time": "half_day"},
+        {"name": "Champagne Region (Reims)", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from Paris", "zone": "Day Trip", "coordinates": [49.2583, 4.0317], "optimal_time": "full_day"},
+        {"name": "Château de Chantilly", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from Paris", "zone": "Day Trip", "coordinates": [49.1939, 2.4850], "optimal_time": "full_day"}
     ],
     
     "london": [
-        # Main City Activities  
-        {"name": "British Museum", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Bloomsbury"},
-        {"name": "Tower of London", "category": "historic landmarks", "duration": "2-3 hours", "type": "city", "location": "Tower Hill"},
-        {"name": "Westminster Abbey", "category": "historic landmarks", "duration": "1.5 hours", "type": "city", "location": "Westminster"},
-        {"name": "Borough Market", "category": "dining hot spots", "duration": "1-2 hours", "type": "city", "location": "London Bridge"},
-        {"name": "Thames River Walk", "category": "scenic drives", "duration": "2 hours", "type": "city", "location": "South Bank"},
-        {"name": "Buckingham Palace", "category": "historic landmarks", "duration": "1-2 hours", "type": "city", "location": "Westminster"},
-        {"name": "Tate Modern", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Bankside"},
-        {"name": "Covent Garden", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "West End"},
-        {"name": "Hyde Park & Speakers' Corner", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Central London"},
-        {"name": "Camden Market", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "Camden Town"},
+        # Main City Activities with Geographic Zones
+        {"name": "British Museum", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Bloomsbury", "zone": "Central", "coordinates": [51.5194, -0.1270], "optimal_time": "morning"},
+        {"name": "Tower of London", "category": "historic landmarks", "duration": "2-3 hours", "type": "city", "location": "Tower Hill", "zone": "East", "coordinates": [51.5081, -0.0759], "optimal_time": "morning"},
+        {"name": "Westminster Abbey", "category": "historic landmarks", "duration": "1.5 hours", "type": "city", "location": "Westminster", "zone": "Central", "coordinates": [51.4994, -0.1273], "optimal_time": "morning"},
+        {"name": "Borough Market", "category": "dining hot spots", "duration": "1-2 hours", "type": "city", "location": "London Bridge", "zone": "South", "coordinates": [51.5055, -0.0909], "optimal_time": "afternoon"},
+        {"name": "Thames River Walk", "category": "scenic drives", "duration": "2 hours", "type": "city", "location": "South Bank", "zone": "Central", "coordinates": [51.5045, -0.0865], "optimal_time": "evening"},
+        {"name": "Buckingham Palace", "category": "historic landmarks", "duration": "1-2 hours", "type": "city", "location": "Westminster", "zone": "Central", "coordinates": [51.5014, -0.1419], "optimal_time": "morning"},
+        {"name": "Tate Modern", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Bankside", "zone": "South", "coordinates": [51.5076, -0.0994], "optimal_time": "afternoon"},
+        {"name": "Covent Garden", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "West End", "zone": "Central", "coordinates": [51.5118, -0.1226], "optimal_time": "afternoon"},
+        {"name": "Hyde Park & Speakers' Corner", "category": "outdoor", "duration": "2 hours", "type": "city", "location": "Central London", "zone": "West", "coordinates": [51.5074, -0.1657], "optimal_time": "morning"},
+        {"name": "Camden Market", "category": "dining hot spots", "duration": "2-3 hours", "type": "city", "location": "Camden Town", "zone": "North", "coordinates": [51.5448, -0.1434], "optimal_time": "afternoon"},
         
         # Day Trips from London
-        {"name": "Stonehenge", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from London"},
-        {"name": "Windsor Castle", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "1 hour from London"},
-        {"name": "Bath Roman Baths", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from London"},
-        {"name": "Canterbury Cathedral", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from London"},
-        {"name": "Brighton Beach", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "1 hour from London"},
-        {"name": "Oxford University Tour", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from London"},
-        {"name": "Stratford-upon-Avon", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from London"}
+        {"name": "Stonehenge", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from London", "zone": "Day Trip", "coordinates": [51.1789, -1.8262], "optimal_time": "full_day"},
+        {"name": "Windsor Castle", "category": "historic landmarks", "duration": "Half day", "type": "day_trip", "location": "1 hour from London", "zone": "Day Trip", "coordinates": [51.4839, -0.6044], "optimal_time": "half_day"},
+        {"name": "Bath Roman Baths", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from London", "zone": "Day Trip", "coordinates": [51.3811, -2.3590], "optimal_time": "full_day"},
+        {"name": "Canterbury Cathedral", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from London", "zone": "Day Trip", "coordinates": [51.2798, 1.0830], "optimal_time": "full_day"},
+        {"name": "Brighton Beach", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "1 hour from London", "zone": "Day Trip", "coordinates": [50.8429, -0.1313], "optimal_time": "full_day"},
+        {"name": "Oxford University Tour", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from London", "zone": "Day Trip", "coordinates": [51.7520, -1.2577], "optimal_time": "full_day"},
+        {"name": "Stratford-upon-Avon", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "2 hours from London", "zone": "Day Trip", "coordinates": [52.1919, -1.7082], "optimal_time": "full_day"}
     ],
     
     "new_york": [
-        # Manhattan Activities
-        {"name": "Metropolitan Museum of Art", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Upper East Side"},
-        {"name": "Central Park Walk", "category": "outdoor", "duration": "2-3 hours", "type": "city", "location": "Manhattan"},
-        {"name": "Statue of Liberty", "category": "historic landmarks", "duration": "4 hours", "type": "city", "location": "Liberty Island"},
-        {"name": "Times Square Experience", "category": "family friendly", "duration": "2 hours", "type": "city", "location": "Midtown"},
-        {"name": "Chelsea Market Food Tour", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Chelsea"},
-        {"name": "9/11 Memorial & Museum", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Lower Manhattan"},
-        {"name": "High Line Park", "category": "outdoor", "duration": "1-2 hours", "type": "city", "location": "West Side"},
-        {"name": "Broadway Show", "category": "family friendly", "duration": "3 hours", "type": "city", "location": "Theater District"},
-        {"name": "Brooklyn Bridge Walk", "category": "outdoor", "duration": "1 hour", "type": "city", "location": "Manhattan/Brooklyn"},
+        # Manhattan Activities with Geographic Zones
+        {"name": "Metropolitan Museum of Art", "category": "museums", "duration": "3-4 hours", "type": "city", "location": "Upper East Side", "zone": "Uptown", "coordinates": [40.7794, -73.9632], "optimal_time": "morning"},
+        {"name": "Central Park Walk", "category": "outdoor", "duration": "2-3 hours", "type": "city", "location": "Manhattan", "zone": "Midtown", "coordinates": [40.7829, -73.9654], "optimal_time": "afternoon"},
+        {"name": "Statue of Liberty", "category": "historic landmarks", "duration": "4 hours", "type": "city", "location": "Liberty Island", "zone": "Downtown", "coordinates": [40.6892, -74.0445], "optimal_time": "morning"},
+        {"name": "Times Square Experience", "category": "family friendly", "duration": "2 hours", "type": "city", "location": "Midtown", "zone": "Midtown", "coordinates": [40.7589, -73.9851], "optimal_time": "evening"},
+        {"name": "Chelsea Market Food Tour", "category": "dining hot spots", "duration": "2 hours", "type": "city", "location": "Chelsea", "zone": "Midtown", "coordinates": [40.7420, -74.0063], "optimal_time": "afternoon"},
+        {"name": "9/11 Memorial & Museum", "category": "museums", "duration": "2-3 hours", "type": "city", "location": "Lower Manhattan", "zone": "Downtown", "coordinates": [40.7115, -74.0134], "optimal_time": "morning"},
+        {"name": "High Line Park", "category": "outdoor", "duration": "1-2 hours", "type": "city", "location": "West Side", "zone": "Midtown", "coordinates": [40.7480, -74.0048], "optimal_time": "afternoon"},
+        {"name": "Broadway Show", "category": "family friendly", "duration": "3 hours", "type": "city", "location": "Theater District", "zone": "Midtown", "coordinates": [40.7590, -73.9845], "optimal_time": "evening"},
+        {"name": "Brooklyn Bridge Walk", "category": "outdoor", "duration": "1 hour", "type": "city", "location": "Manhattan/Brooklyn", "zone": "Downtown", "coordinates": [40.7061, -73.9969], "optimal_time": "morning"},
         
         # Day Trips from NYC
-        {"name": "Brooklyn Neighborhoods Tour", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "30 min from Manhattan"},
-        {"name": "The Hamptons", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "2-3 hours from NYC"},
-        {"name": "Woodbury Common Outlets", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1 hour from NYC"},
-        {"name": "West Point Military Academy", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from NYC"},
-        {"name": "Fire Island", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "2 hours from NYC"},
-        {"name": "Philadelphia", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from NYC"}
+        {"name": "Brooklyn Neighborhoods Tour", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "30 min from Manhattan", "zone": "Day Trip", "coordinates": [40.6782, -73.9442], "optimal_time": "full_day"},
+        {"name": "The Hamptons", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "2-3 hours from NYC", "zone": "Day Trip", "coordinates": [40.9176, -72.3955], "optimal_time": "full_day"},
+        {"name": "Woodbury Common Outlets", "category": "dining hot spots", "duration": "Full day", "type": "day_trip", "location": "1 hour from NYC", "zone": "Day Trip", "coordinates": [41.3217, -74.1668], "optimal_time": "full_day"},
+        {"name": "West Point Military Academy", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1 hour from NYC", "zone": "Day Trip", "coordinates": [41.3914, -73.9573], "optimal_time": "full_day"},
+        {"name": "Fire Island", "category": "beaches", "duration": "Full day", "type": "day_trip", "location": "2 hours from NYC", "zone": "Day Trip", "coordinates": [40.6476, -73.1818], "optimal_time": "full_day"},
+        {"name": "Philadelphia", "category": "historic landmarks", "duration": "Full day", "type": "day_trip", "location": "1.5 hours from NYC", "zone": "Day Trip", "coordinates": [39.9526, -75.1652], "optimal_time": "full_day"}
     ],
     
     "tokyo": [
