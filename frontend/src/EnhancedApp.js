@@ -246,11 +246,34 @@ function EnhancedApp() {
     }
   };
 
+  // Fetch activities for selected cities
+  const fetchActivities = useCallback(async () => {
+    if (selectedDestinations.length === 0) return;
+    
+    try {
+      const cityKeys = selectedDestinations.map(d => d.key).join(',');
+      const params = new URLSearchParams({
+        cities: cityKeys,
+        category: activityFilters.category,
+        include_day_trips: activityFilters.include_day_trips
+      });
+      
+      const response = await axios.get(`${API}/activities?${params.toString()}`);
+      setAllActivities(response.data.activities);
+    } catch (error) {
+      console.error("Error fetching activities:", error);
+    }
+  }, [selectedDestinations, activityFilters]);
+
   useEffect(() => {
     fetchDestinations();
     fetchInterests();
     fetchCitiesAndRegions();
   }, [fetchDestinations]);
+
+  useEffect(() => {
+    fetchActivities();
+  }, [fetchActivities]);
 
   const handleDestinationSelect = (destination) => {
     setSelectedDestinations(prev => {
