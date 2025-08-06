@@ -860,7 +860,7 @@ function EnhancedApp() {
                   onClick={nextStep}
                   className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-bold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg"
                 >
-                  Continue to Dates →
+                  Continue to Activities →
                 </button>
               </div>
             )}
