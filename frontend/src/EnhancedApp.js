@@ -460,7 +460,7 @@ function EnhancedApp() {
   const nextStep = () => {
     if (currentStep === 'destinations' && selectedDestinations.length > 0) {
       setCurrentStep('interests');
-    } else if (currentStep === 'interests' && selectedInterests.length > 0) {
+    } else if (currentStep === 'interests' && selectedActivities.length > 0) {
       setCurrentStep('dates');
     }
   };
