@@ -250,7 +250,26 @@ function EnhancedApp() {
   }, [fetchDestinations]);
 
   const handleDestinationSelect = (destination) => {
-    setSelectedDestination(destination);
+    setSelectedDestinations(prev => {
+      const isSelected = prev.some(d => d.key === destination.key);
+      
+      if (isSelected) {
+        // Remove destination if already selected
+        return prev.filter(d => d.key !== destination.key);
+      } else {
+        // Check proximity (same continent) if there are already selected destinations
+        if (prev.length > 0) {
+          const firstDestination = prev[0];
+          if (firstDestination.continent !== destination.continent) {
+            alert(`Please select destinations from the same continent. You've selected destinations from ${firstDestination.continent}, but ${destination.name} is in ${destination.continent}.`);
+            return prev;
+          }
+        }
+        
+        // Add destination
+        return [...prev, destination];
+      }
+    });
   };
 
   const handleInterestToggle = (interest) => {
