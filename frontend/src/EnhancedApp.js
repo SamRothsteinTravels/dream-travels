@@ -174,6 +174,9 @@ function EnhancedApp() {
   const [selectedDestinations, setSelectedDestinations] = useState([]);
   const [availableInterests, setAvailableInterests] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState([]);
+  const [selectedActivities, setSelectedActivities] = useState([]);
+  const [allActivities, setAllActivities] = useState({});
+  const [activityFilters, setActivityFilters] = useState({ category: 'all', include_day_trips: true });
   const [travelDates, setTravelDates] = useState([]);
   const [numberOfDays, setNumberOfDays] = useState("");
   const [useDates, setUseDates] = useState(false);
