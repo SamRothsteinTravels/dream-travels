@@ -171,7 +171,7 @@ function EnhancedApp() {
   const [currentStep, setCurrentStep] = useState('destinations'); // destinations, interests, dates, itinerary
   const [destinations, setDestinations] = useState([]);
   const [filteredDestinations, setFilteredDestinations] = useState([]);
-  const [selectedDestination, setSelectedDestination] = useState(null);
+  const [selectedDestinations, setSelectedDestinations] = useState([]);
   const [availableInterests, setAvailableInterests] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [travelDates, setTravelDates] = useState([]);
