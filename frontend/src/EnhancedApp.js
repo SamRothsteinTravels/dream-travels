@@ -409,18 +409,25 @@ function EnhancedApp() {
 
     setLoading(true);
     try {
-      const requestData = {
-        destination: selectedDestinations.map(d => d.name).join(', '),
-        interests: selectedActivities.map(a => a.category),
+      // Create optimized itinerary using selected activities
+      const optimizedItinerary = optimizeActivitiesByLocation(selectedActivities);
+      
+      const itineraryData = {
+        destination: selectedDestinations.map(d => d.name).join(' & '),
+        cities: selectedDestinations.map(d => d.name),
+        total_days: optimizedItinerary.length,
+        optimized_days: optimizedItinerary,
         selected_activities: selectedActivities,
-        travel_dates: useDates ? travelDates.filter(date => date) : null,
-        number_of_days: useDates ? null : parseInt(numberOfDays),
         solo_female_traveler: soloFemaleTraveler,
-        budget_range: budgetRange || null
+        optimization_notes: [
+          "📍 Activities grouped by geographic zones to minimize travel time",
+          "🚌 Day trips scheduled for dedicated days", 
+          "⏰ Morning activities prioritized for popular attractions",
+          "🗺️ Routes optimized to avoid backtracking"
+        ]
       };
-
-      const response = await axios.post(`${API}/generate-itinerary`, requestData);
-      setItinerary(response.data);
+      
+      setItinerary(itineraryData);
       setCurrentStep('itinerary');
     } catch (error) {
       console.error("Error generating itinerary:", error);
