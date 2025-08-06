@@ -518,6 +518,8 @@ function EnhancedApp() {
     if (duration.includes('Half')) return 4;
     return 2;
   };
+
+  const resetApp = () => {
     setCurrentStep('destinations');
     setSelectedDestinations([]);
     setSelectedInterests([]);
