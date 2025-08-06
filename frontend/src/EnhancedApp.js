@@ -1083,7 +1083,7 @@ function EnhancedApp() {
           </div>
         )}
 
-        {/* Step 4: Generated Itinerary */}
+        {/* Step 5: Generated Itinerary */}
         {currentStep === 'itinerary' && itinerary && (
           <div className="space-y-8">
             {/* Itinerary Header */}
