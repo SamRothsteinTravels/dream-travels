@@ -823,6 +823,191 @@ SAMPLE_ACTIVITIES = {
     ]
 }
 
+import math
+from typing import List, Dict, Tuple
+
+def calculate_distance(coord1: List[float], coord2: List[float]) -> float:
+    """Calculate distance between two coordinates using Haversine formula"""
+    lat1, lon1 = math.radians(coord1[0]), math.radians(coord1[1])
+    lat2, lon2 = math.radians(coord2[0]), math.radians(coord2[1])
+    
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    
+    a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+    c = 2 * math.asin(math.sqrt(a))
+    
+    # Radius of earth in kilometers
+    r = 6371
+    return c * r
+
+def optimize_daily_route(activities: List[Dict], max_daily_hours: int = 8) -> List[List[Dict]]:
+    """
+    Optimize activities into daily routes using geographic clustering and time constraints
+    """
+    if not activities:
+        return []
+    
+    # Separate day trips from city activities
+    city_activities = [a for a in activities if a.get('type') != 'day_trip']
+    day_trips = [a for a in activities if a.get('type') == 'day_trip']
+    
+    optimized_days = []
+    
+    # Process day trips first (each gets its own day)
+    for day_trip in day_trips:
+        optimized_days.append([day_trip])
+    
+    # Group city activities by zone and optimal time
+    if city_activities:
+        # Group by zone first
+        zone_groups = {}
+        for activity in city_activities:
+            zone = activity.get('zone', 'Unknown')
+            if zone not in zone_groups:
+                zone_groups[zone] = []
+            zone_groups[zone].append(activity)
+        
+        # Create daily itineraries from zone groups
+        remaining_activities = city_activities.copy()
+        
+        while remaining_activities:
+            daily_activities = []
+            daily_hours = 0
+            current_location = None
+            
+            # Start with morning activities in central zones
+            morning_central = [a for a in remaining_activities 
+                             if a.get('optimal_time') == 'morning' and 
+                             a.get('zone') in ['Central', 'Midtown']]
+            
+            if morning_central:
+                activity = morning_central[0]
+                daily_activities.append(activity)
+                remaining_activities.remove(activity)
+                daily_hours += estimate_activity_hours(activity)
+                current_location = activity.get('coordinates')
+            
+            # Add nearby activities for the rest of the day
+            while remaining_activities and daily_hours < max_daily_hours:
+                best_next = find_nearest_activity(current_location, remaining_activities, daily_hours, max_daily_hours)
+                
+                if not best_next:
+                    break
+                    
+                daily_activities.append(best_next)
+                remaining_activities.remove(best_next)
+                daily_hours += estimate_activity_hours(best_next)
+                current_location = best_next.get('coordinates')
+            
+            if daily_activities:
+                optimized_days.append(daily_activities)
+    
+    return optimized_days
+
+def estimate_activity_hours(activity: Dict) -> float:
+    """Estimate hours needed for an activity"""
+    duration = activity.get('duration', '2 hours')
+    
+    if 'Full day' in duration:
+        return 8
+    elif 'Half day' in duration:
+        return 4
+    elif '3-4 hours' in duration:
+        return 3.5
+    elif '2-3 hours' in duration:
+        return 2.5
+    elif '1-2 hours' in duration:
+        return 1.5
+    elif '1.5 hours' in duration:
+        return 1.5
+    elif '1 hour' in duration:
+        return 1
+    else:
+        return 2  # default
+
+def find_nearest_activity(current_location: List[float], activities: List[Dict], 
+                         current_hours: float, max_hours: float) -> Dict:
+    """Find the nearest suitable activity considering time constraints"""
+    if not current_location or not activities:
+        return None
+    
+    suitable_activities = []
+    
+    for activity in activities:
+        activity_hours = estimate_activity_hours(activity)
+        if current_hours + activity_hours <= max_hours:
+            if activity.get('coordinates'):
+                distance = calculate_distance(current_location, activity.get('coordinates'))
+                suitable_activities.append((distance, activity))
+    
+    if not suitable_activities:
+        return None
+    
+    # Sort by distance and return the nearest
+    suitable_activities.sort(key=lambda x: x[0])
+    return suitable_activities[0][1]
+
+@app.post("/api/optimize-itinerary")
+async def optimize_itinerary(request: dict):
+    """
+    Create an optimized itinerary from selected activities
+    """
+    selected_activities = request.get("selected_activities", [])
+    cities = request.get("cities", [])
+    duration_days = request.get("duration_days", 3)
+    
+    if not selected_activities:
+        return {"error": "No activities provided", "optimized_days": []}
+    
+    try:
+        # Optimize the route
+        optimized_days = optimize_daily_route(selected_activities, max_daily_hours=8)
+        
+        # Format the response
+        itinerary = {
+            "cities": cities,
+            "total_days": len(optimized_days),
+            "optimized_days": [],
+            "optimization_notes": []
+        }
+        
+        for day_idx, day_activities in enumerate(optimized_days):
+            day_info = {
+                "day": day_idx + 1,
+                "activities": day_activities,
+                "total_activities": len(day_activities),
+                "estimated_hours": sum(estimate_activity_hours(a) for a in day_activities),
+                "primary_zone": get_primary_zone(day_activities),
+                "includes_day_trip": any(a.get('type') == 'day_trip' for a in day_activities)
+            }
+            itinerary["optimized_days"].append(day_info)
+        
+        # Add optimization notes
+        if any(day.get("includes_day_trip") for day in itinerary["optimized_days"]):
+            itinerary["optimization_notes"].append("🚌 Day trips are scheduled for dedicated days to maximize experience")
+        
+        itinerary["optimization_notes"].append("📍 Activities are grouped by geographic zones to minimize travel time")
+        itinerary["optimization_notes"].append("⏰ Morning activities are prioritized for popular attractions")
+        
+        return itinerary
+        
+    except Exception as e:
+        return {"error": f"Optimization failed: {str(e)}", "optimized_days": []}
+
+def get_primary_zone(activities: List[Dict]) -> str:
+    """Get the primary geographic zone for a day's activities"""
+    if not activities:
+        return "Unknown"
+    
+    zones = [a.get('zone', 'Unknown') for a in activities]
+    # Return most common zone
+    zone_counts = {}
+    for zone in zones:
+        zone_counts[zone] = zone_counts.get(zone, 0) + 1
+    
+    return max(zone_counts.items(), key=lambda x: x[1])[0]
+
 # HTTP client for external APIs
 http_client = httpx.AsyncClient(timeout=30.0)
 
