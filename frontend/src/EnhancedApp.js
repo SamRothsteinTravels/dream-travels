@@ -338,7 +338,7 @@ function EnhancedApp() {
     setLoading(true);
     try {
       const requestData = {
-        destination: selectedDestination.name,
+        destination: selectedDestinations.map(d => d.name).join(', '),
         interests: selectedInterests,
         travel_dates: useDates ? travelDates.filter(date => date) : null,
         number_of_days: useDates ? null : parseInt(numberOfDays),
